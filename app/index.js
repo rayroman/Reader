@@ -3,6 +3,7 @@
  */
 import React from "react";
 import ReactDOM from "react-dom";
+import "./stylesheets/main.scss"
 
 // Creating a test component
 class HelloWorld extends React.Component {
