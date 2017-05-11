@@ -21,6 +21,14 @@ const routerWithDB = db => {
                 results.length > 0 ? res.send(results) : res.send("None found :(\n");
             });
     })
+        //Delete character
+        .delete("/char/:char", (req, res) => {
+            const char = req.params.char;
+            character.deleteMany({$or: [{charTrad: char}, {charSimp: char}]})
+                .then(results => {
+                    res.send(results);
+                });
+        })
         //Get all characters
         .get("/char", (req, res) => {
             character.find({})
@@ -31,10 +39,10 @@ const routerWithDB = db => {
         })
         // Insert a character
         .post("/char", (req, res) => {
-            console.log(req);
+            console.log(req.body);
             character.insertOne(req.body)
                 .then(result => {
-                    res(result);
+                    res.send(result);
                 })
         });
 

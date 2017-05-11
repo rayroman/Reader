@@ -3,6 +3,7 @@
  */
 const MongoClient = require("mongodb").MongoClient,
     express = require("express"),
+    bodyParser = require("body-parser"),
     url = "mongodb://localhost:27017/reader",
     routerWithDB = require("./apiRouter");
 
@@ -20,6 +21,7 @@ const logRequest = (req, res, next) => {
 };
 
 app.use(logRequest);
+app.use(bodyParser.json());
 
 MongoClient.connect(url)
     .then(db => {
