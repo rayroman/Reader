@@ -16,12 +16,10 @@ module.exports = {
                 exclude: /(node_modules)/,
                 // transpile only browser stuff
                 include: path.join(__dirname, "app"),
-                use: [
-                    {
-                        loader: "babel-loader",
-                        options: ["react", "es2015"]
-                    }
-                ]
+                loader: "babel-loader",
+                options: {
+                    presets: ["react", "es2015"]
+                }
             }
         ]
     }
