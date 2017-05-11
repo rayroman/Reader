@@ -4,17 +4,17 @@
 const path = require("path");
 
 module.exports = {
-    entry: "./app/components/App.js", // will change this after testing
+    entry: "./app/index.js", // will change this after testing
     output: {
         filename: "bundle.js",
-        path: "build"
+        path: path.join(__dirname, "build")
     },
     module: {
         rules: [
             {
                 test: /\.js$/,
                 exclude: /(node_modules)/,
-                // transpile both browser components and server stuff
+                // transpile only browser stuff
                 include: path.join(__dirname, "app"),
                 use: [
                     {
