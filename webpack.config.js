@@ -9,6 +9,11 @@ module.exports = {
         filename: "bundle.js",
         path: path.join(__dirname, "build")
     },
+    devServer: {
+        inline: true,
+        contentBase: "./build",
+        port: 3000
+    },
     module: {
         rules: [
             {
