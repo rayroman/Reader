@@ -10,8 +10,9 @@ const router = express.Router();
 const routerWithDB = db => {
     const character = db.collection("character"),
         vocabulary = db.collection("vocabulary");
-    
-    router.get("/:char", (req, res) => {
+
+    // Get a specific character
+    router.get("/char/:char", (req, res) => {
         const char = req.params.char;
 
         // Allow for both simplified and traditional, so can search either one
@@ -20,5 +21,22 @@ const routerWithDB = db => {
             .then(results => {
                 results ? res.send(results) : res.send("None found :(\n");
             });
-    });
+    })
+        //Get all characters
+        .get("/char", (req, res) => {
+            character.find({})
+                .toArray()
+                .then(results => {
+                    res.send(results);
+                })
+        })
+        // Insert a character
+        .post("/char", (req, res) => {
+            character.insertOne(req.body)
+                .then(result => {
+                    res(result);
+                })
+        })
 };
+
+export default routerWithDB;
