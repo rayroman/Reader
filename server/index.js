@@ -3,7 +3,8 @@
  */
 const MongoClient = require("mongodb").MongoClient,
     express = require("express"),
-    url = "mongodb://localhost:27017/reader";
+    url = "mongodb://localhost:27017/reader",
+    routerWithDB = require("./apiRouter");
 
 const app = express();
 
@@ -19,3 +20,18 @@ const logRequest = (req, res, next) => {
 };
 
 app.use(logRequest);
+
+MongoClient.connect(url)
+    .then(db => {
+        app.use("/api", routerWithDB(db));
+        console.log("Successfully connected to MongoDB server!");
+        app.get("/", (req, res) => {
+                res.send("Welcome!\n");
+            });
+        app.listen(8080, () => {
+            console.log("Express server listening on port 8080!");
+        })
+    })
+    .catch(err => {
+        console.log(err.stack);
+    });

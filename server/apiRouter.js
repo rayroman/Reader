@@ -2,8 +2,7 @@
  * Created by rroman681 on 5/11/17.
  * Primarily for code chunking: keep the API-level router stuff in a separate file.
  */
-import express from "express";
-
+const express = require("express");
 
 const router = express.Router();
 
@@ -19,7 +18,7 @@ const routerWithDB = db => {
         character.find({$or: [{charTrad: char}, {charSimp: char}]})
             .toArray()
             .then(results => {
-                results ? res.send(results) : res.send("None found :(\n");
+                results.length > 0 ? res.send(results) : res.send("None found :(\n");
             });
     })
         //Get all characters
@@ -27,16 +26,19 @@ const routerWithDB = db => {
             character.find({})
                 .toArray()
                 .then(results => {
-                    res.send(results);
+                    results.length > 0 ? res.send(results) : res.send("None found :(\n");
                 })
         })
         // Insert a character
         .post("/char", (req, res) => {
+            console.log(req);
             character.insertOne(req.body)
                 .then(result => {
                     res(result);
                 })
-        })
+        });
+
+    return router;
 };
 
-export default routerWithDB;
+module.exports = routerWithDB;
