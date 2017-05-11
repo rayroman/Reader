@@ -18,16 +18,4 @@ const logRequest = (req, res, next) => {
     next();
 };
 
-/**
- * Supplies middleware with whatever mongodb database
- * @param db
- */
-const routesWithCollection = db => {
-    app.use(logRequest);
-
-    app.get("/", (req, res) => {
-        res.send("Hello world!\n");
-    }).listen(8080, () => {
-        console.log("Listening on port 8080!");
-    });
-};
+app.use(logRequest);
