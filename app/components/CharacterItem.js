@@ -5,6 +5,8 @@
 import {Component} from "react";
 import PropTypes from "prop-types";
 import "../stylesheets/character.scss";
+import FaKey from "react-icons/lib/fa/key";
+import FaVolumeUp from "react-icons/lib/fa/volume-up";
 
 export default class CharacterItem extends Component {
     constructor() {
@@ -15,6 +17,7 @@ export default class CharacterItem extends Component {
     }
 
     render() {
+        const vol = this.props.heisigNumber <= 1500 ? "I" : "II";
         return (
             <article>
                 <h1 className="character">{
@@ -22,13 +25,14 @@ export default class CharacterItem extends Component {
                     this.props.charTrad :
                     this.props.charSimp
                 }</h1>
-                <section>
-                    <section>
-                        <h2>{this.props.keyword}</h2>
-                        <div>Lesson {this.props.lessonNumber} ({this.props.absoluteNumber})</div>
+                <section className="heisigInfo">
+                    <section className="lookup rowChildren">
+                        <h2><FaKey/> <span className="keyword space">{this.props.keyword}</span></h2>
+                        <div>Lesson {this.props.lessonNumber} ({vol}), #{this.props.heisigNumber}</div>
+                        <div className="extraInfo"><small>(absolute: #{this.props.absoluteNumber})</small></div>
                     </section>
-                    <section>
-                        <h2>{this.props.pinyin}</h2>
+                    <section className="pinyin rowChildren">
+                        <h2><FaVolumeUp/> <span className="space">{this.props.pinyin}</span></h2>
                     </section>
                 </section>
             </article>
