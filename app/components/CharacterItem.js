@@ -6,6 +6,13 @@ import {Component} from "react";
 import PropTypes from "prop-types";
 
 export default class CharacterItem extends Component {
+    constructor() {
+        super();
+        this.state = {
+            showTraditional: true
+        }
+    }
+
     render() {
         return (
             <article>
