@@ -4,6 +4,7 @@
 
 import {Component} from "react";
 import PropTypes from "prop-types";
+import "../stylesheets/character.scss";
 
 export default class CharacterItem extends Component {
     constructor() {
@@ -16,7 +17,7 @@ export default class CharacterItem extends Component {
     render() {
         return (
             <article>
-                <h1>{
+                <h1 className="character">{
                 this.state.showTraditional ?
                     this.props.charTrad :
                     this.props.charSimp

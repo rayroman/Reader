@@ -2,11 +2,22 @@ $latinFonts: "Noto Sans", Helvetica, Arial, sans-serif;
 $chineseFonts: "Noto Sans", Helvetica, Arial, "Noto Sans TC", sans-serif;
 $themeBlue: rgba(52, 79, 94, 1);
 $themeTeal: rgba(70, 178, 157, 1);
-$themeWhite: rgba(240, 238, 189, 0.8);
+$themeWhite: rgba(240, 238, 189, 1);
 $themeOrange: rgba(227, 153, 82, 1);
 $themeRed: rgba(222, 91, 73, 1);
 
-body {
+html {
   font: 100% $latinFonts;
-  color: $themeBlue;
+  color: $themeWhite;
+  padding-top: 200px;
+  background-color: $themeBlue;
+}
+
+body {
+  margin: 0 auto;
+  width: 720px;
+}
+
+.character {
+  font-family: $chineseFonts;
 }

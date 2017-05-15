@@ -1,0 +1,12 @@
+@import "./main";
+
+article {
+  background-color: $themeRed;
+  padding: 50px;
+}
+
+h1.character {
+  font-size: 10rem;
+  line-height: 1em;
+  text-align: center;
+}
