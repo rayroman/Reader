@@ -3,7 +3,10 @@
  */
 import React from "react";
 import ReactDOM from "react-dom";
-import CharacterItem from "./components/CharacterItem";
+import {Provider} from "react-redux";
+import CharacterItem from "./containers/CharacterItem";
+import defaultState from "./initialState.json";
+import storeFactory from "./store";
 import "./stylesheets/main.scss"
 
 // Allow React to be a global object
@@ -11,16 +14,18 @@ window.React = React;
 
 // Include character
 const testCharacter = {
-    charTrad: "城",
-    charSimp: "城",
-    lessonNumber: 16,
-    heisigNumber: 383,
-    absoluteNumber: 511,
-    keyword: "city",
-    pinyin: "chéng",
+    charTrad: "總",
+    charSimp: "总",
+    lessonNumber: 55,
+    heisigNumber: 1517,
+    absoluteNumber: 2928,
+    keyword: "general",
+    pinyin: "zǒng",
 };
 
 // Render it
 ReactDOM.render(
-    <CharacterItem {...testCharacter}/>,
+    <Provider store={storeFactory(defaultState)}>
+        <CharacterItem {...testCharacter}/>
+    </Provider>,
     document.getElementById("react-container"));

@@ -3,20 +3,21 @@
  */
 
 import PropTypes from "prop-types";
+import Hanzi from "./Hanzi";
 import "../stylesheets/character.scss";
 import FaKey from "react-icons/lib/fa/key";
 import FaVolumeUp from "react-icons/lib/fa/volume-up";
 
 // Stateless component
-const CharacterItem = ({charTrad, charSimp, lessonNumber, heisigNumber, absoluteNumber, keyword}) => {
+const CharacterItem = ({showTrad, toggleChar = f => f, charTrad, charSimp, pinyin, lessonNumber, heisigNumber, absoluteNumber, keyword}) => {
     const vol = heisigNumber <= 1500 ? "I" : "II";
     return (
         <article>
-            <h1 className="character">{
-                this.state.showTraditional ?
-                    charTrad :
-                    charSimp
-            }</h1>
+            <Hanzi charTrad={charTrad}
+                   charSimp={charSimp}
+                   showTrad={showTrad}
+                   onToggle={toggleChar}
+            />
             <section className="heisigInfo">
                 <section className="lookup rowChildren">
                     <h2><FaKey/> <span className="keyword space">{keyword}</span></h2>

@@ -3,7 +3,6 @@
  */
 import C from "./constants";
 
-export const toggleChar = (isTrad = true) => ({
-    type: C.TOGGLE_TRADITIONAL,
-    payload: isTrad
+export const toggleChar = () => ({
+    type: C.TOGGLE_TRADITIONAL
 });
