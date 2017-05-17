@@ -15,12 +15,13 @@ export const isTrad = (state = true, action) => {
         state;
 };
 
-export const query = (state = null, action) => (
+export const currChar = (state = null, action) => (
     (action.type === C.FIND_QUERY) ?
         action.payload :
         state
 );
 
 export default combineReducers({
-    isTrad
+    isTrad,
+    currChar
 });

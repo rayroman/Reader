@@ -7,6 +7,7 @@ import {toggleChar} from "../actions";
 
 const mapStateToProps = (state, props) => ({
     showTrad: state.isTrad,
+    currChar: state.currChar
 });
 
 const mapDispatchToProps = dispatch => ({

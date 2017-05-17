@@ -26,6 +26,6 @@ const testCharacter = {
 // Render it
 ReactDOM.render(
     <Provider store={storeFactory(defaultState)}>
-        <CharacterItem {...testCharacter}/>
+        <CharacterItem/>
     </Provider>,
     document.getElementById("react-container"));
