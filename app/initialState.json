@@ -1,5 +1,6 @@
 {
   "isTrad": true,
+  "fetching": false,
   "currChar": {
     "charTrad": "總",
     "charSimp": "总",

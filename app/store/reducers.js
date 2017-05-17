@@ -15,13 +15,32 @@ export const isTrad = (state = true, action) => {
         state;
 };
 
-export const currChar = (state = null, action) => (
-    (action.type === C.FIND_QUERY) ?
-        action.payload :
-        state
-);
+export const fetching = (state = false, action) => {
+    switch(action.type) {
+        case C.FETCH_ITEM:
+            return true;
+        case C.CANCEL_FETCH:
+            return false;
+
+        default:
+            return state;
+    }
+};
+
+export const currChar = (state = {}, action) => {
+    switch(action.type) {
+        case C.CLEAR_ITEM:
+            return state;
+        case C.CHANGE_ITEM:
+            return action.payload;
+
+        default:
+            return state;
+    }
+};
 
 export default combineReducers({
     isTrad,
+    fetching,
     currChar
 });

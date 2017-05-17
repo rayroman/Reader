@@ -7,7 +7,11 @@
  */
 const constant = {
     TOGGLE_TRADITIONAL: "TOGGLE_TRADITIONAL",
-    FIND_QUERY: "FIND_QUERY"
+    FETCH_ITEM: "FETCH_ITEM",
+    RETURN_ITEM: "RETURN_ITEM",
+    CANCEL_FETCH: "CANCEL_FETCH",
+    CHANGE_ITEM: "CHANGE_ITEM",
+    CLEAR_ITEM: "CLEAR_ITEM"
 };
 
 export default constant;

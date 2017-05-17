@@ -4,21 +4,29 @@
 import C from "./constants";
 import fetch from "isomorphic-fetch";
 
+// Switch from simplified to traditional and vice versa
 export const toggleChar = () => ({
     type: C.TOGGLE_TRADITIONAL
 });
 
-export const find = char => ({
-    type: C.FIND_QUERY,
-    payload: char
+// Return the results from the query
+export const returnQuery = item => ({
+    type: C.RETURN_ITEM,
+    payload: item
 });
 
-export const returnQuery = char => (dispatch, getState) => {
-    dispatch(find(char));
+// Full lifecycle query
+export const query = char => (dispatch, getState) => {
+    dispatch({
+        type: C.FETCH_ITEM
+    });
 
     fetch(`http://localhost:8080/api/char/${char}`)
         .then(res => res.json())
-        .then(charInfo => {
-            dispatch(/*Todo*/)
+        .then(itemInfo => {
+            dispatch(returnQuery(itemInfo));
+            dispatcy({
+                type: C.CANCEL_FETCH
+            })
         });
 };
