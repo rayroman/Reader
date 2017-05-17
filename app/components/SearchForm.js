@@ -1,10 +1,7 @@
 /**
  * Created by rroman681 on 5/16/17.
  */
-
-import FaCog from "react-icons/lib/fa/cog";
-
-const SearchForm = ({onChangeChar = f => f, fetching}) => {
+const SearchForm = ({onChangeChar = f => f}) => {
     let item;
     // Talk to API when submitting a query
     const submit = e => {
@@ -22,7 +19,7 @@ const SearchForm = ({onChangeChar = f => f, fetching}) => {
             <input type="text"
                    ref={input => item = input}
             />
-            <button>{fetching ? <FaCog className="fa-spin"/> : "Search" }</button>
+            <button>Search</button>
         </form>
     )
 };
