@@ -7,9 +7,10 @@ import Hanzi from "./Hanzi";
 import "../stylesheets/character.scss";
 import FaKey from "react-icons/lib/fa/key";
 import FaVolumeUp from "react-icons/lib/fa/volume-up";
+import SearchForm from "./SearchForm";
 
 // Stateless component
-const CharacterItem = ({showTrad, toggleChar = f => f, currChar}) => {
+const CharacterItem = ({showTrad, toggleChar = f => f, onChangeChar = f => f, currChar}) => {
     const vol = currChar.heisigNumber <= 1500 ? "I" : "II";
     return (
         <article>
@@ -27,6 +28,9 @@ const CharacterItem = ({showTrad, toggleChar = f => f, currChar}) => {
                 <section className="pinyin rowChildren">
                     <h2><FaVolumeUp/> <span className="space">{currChar.pinyin}</span></h2>
                 </section>
+            </section>
+            <section>
+                <SearchForm onChangeChar={onChangeChar} />
             </section>
         </article>
     )

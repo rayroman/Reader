@@ -18,7 +18,9 @@ const routerWithDB = db => {
         character.find({$or: [{charTrad: char}, {charSimp: char}]})
             .toArray()
             .then(results => {
-                results.length > 0 ? res.send(results) : res.send("None found :(\n");
+                results.length > 0 ?
+                    res.status(200).json(results[0]) :
+                    res.status(204).send("None found :(\n");
             });
     })
         //Delete character

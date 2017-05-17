@@ -2,12 +2,12 @@
   "isTrad": true,
   "fetching": false,
   "currChar": {
-    "charTrad": "總",
-    "charSimp": "总",
-    "lessonNumber": 55,
-    "heisigNumber": 1517,
-    "absoluteNumber": 2928,
-    "keyword": "general",
-    "pinyin": "zǒng"
+    "charTrad": "一",
+    "charSimp": "一",
+    "lessonNumber": 1,
+    "heisigNumber": 1,
+    "absoluteNumber": 1,
+    "keyword": "one",
+    "pinyin": "yī"
   }
 }

@@ -31,7 +31,7 @@ export const currChar = (state = {}, action) => {
     switch(action.type) {
         case C.CLEAR_ITEM:
             return state;
-        case C.CHANGE_ITEM:
+        case C.RETURN_ITEM:
             return action.payload;
 
         default:

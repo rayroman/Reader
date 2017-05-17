@@ -22,10 +22,16 @@ export const query = char => (dispatch, getState) => {
     });
 
     fetch(`http://localhost:8080/api/char/${char}`)
-        .then(res => res.json())
-        .then(itemInfo => {
+        .then(res => {
+            // Return if something is found
+            return (res.status === 200) ?
+                res.json() :
+                // Return original state if not
+                getState().currChar;
+        })
+        .then((itemInfo) => {
             dispatch(returnQuery(itemInfo));
-            dispatcy({
+            dispatch({
                 type: C.CANCEL_FETCH
             })
         });
