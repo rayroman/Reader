@@ -6,7 +6,8 @@
  As of now, just need changing the traditional <-> simplified action
  */
 const constant = {
-    TOGGLE_TRADITIONAL: "TOGGLE_TRADITIONAL"
+    TOGGLE_TRADITIONAL: "TOGGLE_TRADITIONAL",
+    FIND_QUERY: "FIND_QUERY"
 };
 
 export default constant;

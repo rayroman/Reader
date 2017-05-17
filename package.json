@@ -23,6 +23,7 @@
   "dependencies": {
     "body-parser": "^1.17.1",
     "express": "^4.15.2",
+    "isomorphic-fetch": "^2.2.1",
     "mongodb": "^2.2.26",
     "prop-types": "^15.5.10",
     "react": "^15.5.4",
