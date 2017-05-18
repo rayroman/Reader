@@ -3,15 +3,16 @@
  */
 /*
  Will populate this more as more actions become necessary
- As of now, just need changing the traditional <-> simplified action
  */
 const constant = {
     TOGGLE_TRADITIONAL: "TOGGLE_TRADITIONAL",
+    TOGGLE_TESTING: "TOGGLE_TESTING",
     FETCH_ITEM: "FETCH_ITEM",
     RETURN_ITEM: "RETURN_ITEM",
     CANCEL_FETCH: "CANCEL_FETCH",
     CHANGE_ITEM: "CHANGE_ITEM",
-    CLEAR_ITEM: "CLEAR_ITEM"
+    CLEAR_ITEM: "CLEAR_ITEM",
+    SUBMIT_GUESS: "SUBMIT_GUESS"
 };
 
 export default constant;

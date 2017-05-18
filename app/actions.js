@@ -15,6 +15,17 @@ export const returnQuery = item => ({
     payload: item
 });
 
+// Switch between testing and studying mode
+export const toggleTesting = () => ({
+    type: C.TOGGLE_TESTING
+});
+
+// Submit a guess to be validated
+export const submitGuess = guess => ({
+    type: C.SUBMIT_GUESS,
+    payload: guess
+});
+
 // Full lifecycle query
 export const query = char => (dispatch, getState) => {
     dispatch({
