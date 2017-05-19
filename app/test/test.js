@@ -74,16 +74,18 @@ describe("character database", () => {
         "keyword" : "fate",
         "pinyin" : "mìng",
     };
-    const apiURL = nock("http://localhost:8080"),
-        existsURL = apiURL
-            .get("/api/char/命")
-            .reply(200, lifeChar),
-        doesNotExistURL = apiURL
-            .get("/api/char/a")
-            .reply(404, {});
+
+    let apiURL, existsURL, doesNotExistURL;
 
 
     beforeEach(() => {
+        apiURL = nock("http://localhost:8080");
+        existsURL = apiURL
+                .get("/api/char/命")
+                .reply(200, lifeChar);
+        doesNotExistURL = apiURL
+                .get("/api/char/a")
+                .reply(404, {});
         store = storeFactory({
             currChar: {
                 "charTrad": "一",
@@ -95,6 +97,10 @@ describe("character database", () => {
                 "pinyin": "yī"
             }
         });
+    });
+
+    afterEach(() => {
+        nock.cleanAll();
     });
 
     // Testing fetching actions
@@ -120,7 +126,21 @@ describe("character database", () => {
     describe("changing state", () => {
         // Successful change
         it("should change the current character", (done) => {
-            // Todo: Write test for this one
-        })
+            store.dispatch(query("命"))
+                .then(() => {
+                    expect(store.getState().currChar.charTrad).to.equal("命");
+                    done();
+                })
+        });
+
+        // unsuccessful change
+        it("should return the exact same character upon unsuccessful fetch", (done) => {
+            const charBefore = store.getState().currChar.charTrad;
+            store.dispatch(query("a"))
+                .then(() => {
+                    expect(store.getState().currChar.charTrad).to.equal(charBefore);
+                    done();
+                })
+        });
     });
 });

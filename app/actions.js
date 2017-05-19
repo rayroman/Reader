@@ -21,7 +21,7 @@ export const query = char => (dispatch, getState) => {
         type: C.FETCH_ITEM
     });
 
-    fetch(`http://localhost:8080/api/char/${char}`)
+    return fetch(`http://localhost:8080/api/char/${char}`)
         .then(res => {
             // Return if something is found
             return (res.status === 200) ?
@@ -34,5 +34,6 @@ export const query = char => (dispatch, getState) => {
             dispatch({
                 type: C.CANCEL_FETCH
             })
-        });
+        })
+        .catch(err => console.log(err.stack));
 };
