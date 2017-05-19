@@ -62,13 +62,30 @@ describe("toggling character", () => {
     })
 });
 
-describe("fetching characters", () => {
+describe("character database", () => {
     // Mock API for character retrieval
     let store; // empty store
+    const lifeChar = {
+        "charTrad" : "命",
+        "charSimp" : "命",
+        "lessonNumber" : 36,
+        "heisigNumber" : 1045,
+        "absoluteNumber" : 1901,
+        "keyword" : "fate",
+        "pinyin" : "mìng",
+    };
     const apiURL = nock("http://localhost:8080"),
         existsURL = apiURL
-            .get("/api/char/一")
-            .reply(200, {
+            .get("/api/char/命")
+            .reply(200, lifeChar),
+        doesNotExistURL = apiURL
+            .get("/api/char/a")
+            .reply(404, {});
+
+
+    beforeEach(() => {
+        store = storeFactory({
+            currChar: {
                 "charTrad": "一",
                 "charSimp": "一",
                 "lessonNumber": 1,
@@ -76,31 +93,34 @@ describe("fetching characters", () => {
                 "absoluteNumber": 1,
                 "keyword": "one",
                 "pinyin": "yī"
-            }),
-        doesNotExistURL = apiURL
-            .get("/api/char/a")
-            .reply(404, {});
-
-
-    beforeEach(() => {
-        store = storeFactory();
+            }
+        });
     });
 
     // Testing fetching actions
-    it("should successfully return", (done) => {
-        fetch("http://localhost:8080/api/char/一")
-            .then(res => res.json())
-            .then(item => {
-                expect(item.charTrad).to.equal("一");
-                done();
-            });
+    describe("fetching actions", () => {
+        it("should successfully return", (done) => {
+            fetch("http://localhost:8080/api/char/命")
+                .then(res => res.json())
+                .then(item => {
+                    expect(item.charTrad).to.equal("命");
+                    done();
+                });
+        });
+
+        it("should unsuccessfully return", (done) => {
+            fetch("http://localhost:8080/api/char/a")
+                .then(res => {
+                    expect(res.status).to.equal(404);
+                    done();
+                })
+        });
     });
 
-    it("should unsuccessfully return", (done) => {
-        fetch("http://localhost:8080/api/char/a")
-            .then(res => {
-                expect(res.status).to.equal(404);
-                done();
-            })
+    describe("changing state", () => {
+        // Successful change
+        it("should change the current character", (done) => {
+            // Todo: Write test for this one
+        })
     });
 });
