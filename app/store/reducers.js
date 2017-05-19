@@ -27,6 +27,12 @@ export const fetching = (state = false, action) => {
     }
 };
 
+export const currLesson = (state = 1, action) => {
+    return (action.type === C.CHANGE_LESSON) ?
+        action.payload :
+        state;
+};
+
 export const currChar = (state = {}, action) => {
     switch(action.type) {
         case C.CLEAR_ITEM:

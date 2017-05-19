@@ -11,7 +11,8 @@ const constant = {
     RETURN_ITEM: "RETURN_ITEM",
     CANCEL_FETCH: "CANCEL_FETCH",
     CHANGE_ITEM: "CHANGE_ITEM",
-    CLEAR_ITEM: "CLEAR_ITEM"
+    CLEAR_ITEM: "CLEAR_ITEM",
+    CHANGE_LESSON: "CHANGE_LESSON"
 };
 
 export default constant;

@@ -3,7 +3,7 @@
  */
 import {expect} from "chai";
 import C from "../constants"
-import {isTrad} from "../store/reducers";
+import {isTrad, currLesson} from "../store/reducers";
 import storeFactory from "../store/index";
 import {query} from "../actions";
 import sinon from "sinon";
@@ -143,4 +143,22 @@ describe("character database", () => {
                 })
         });
     });
+});
+
+// Modifying the Heisig lesson
+describe("changing lesson", () => {
+    let lesson, action;
+    beforeEach(() => {
+        lesson = 1;
+        action = {
+            type: C.CHANGE_LESSON,
+            payload: 3
+        };
+    });
+
+    // Change to lesson 3
+    it("should change the lesson from 1 to 3", () => {
+        const result = currLesson(lesson, action);
+        expect(result).to.equal(3);
+    })
 });
