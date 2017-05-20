@@ -97,7 +97,7 @@ describe("character database", () => {
     describe("changing state", () => {
         // Successful change
         it("should change the current character", (done) => {
-            store.dispatch(query("命"))
+            store.dispatch(query("命", "char"))
                 .then(() => {
                     expect(store.getState().currChar.charTrad).to.equal("命");
                     done();
@@ -107,7 +107,7 @@ describe("character database", () => {
         // unsuccessful change
         it("should return the exact same character upon unsuccessful fetch", (done) => {
             const charBefore = store.getState().currChar.charTrad;
-            store.dispatch(query("a"))
+            store.dispatch(query("a", "char"))
                 .then(() => {
                     expect(store.getState().currChar.charTrad).to.equal(charBefore);
                     done();
@@ -142,26 +142,76 @@ describe("changing lesson", () => {
 // Find appropriate vocabulary
 describe("vocabulary", () => {
     const char1 = {
-        "charTrad":"雹",
-        "stats":{"read":false, "timesSeen":0, "timesCorrect":0},
-        "srs":{ "difficulty":0.3, "daysBetweenReviews":0 }
-    },
-    char2 = {
         "charTrad" : "冰",
         "stats" : { "read" : false, "timesSeen" : 0, "timesCorrect" : 0 },
         "srs": { "difficulty" : 0.3, "daysBetweenReviews" : 0 },
+    }, char2 = {
+        "charTrad":"雹",
+        "stats":{"read":false, "timesSeen":0, "timesCorrect":0},
+        "srs":{ "difficulty":0.3, "daysBetweenReviews":0 }
     };
 
     const vocab = {
         "itemTrad":"冰雹",
-        "pinyin":["bing1 bao2"],
-        "definitions":[
-            "hail",
-            "hailstone",
-            "CL:場|场[chang2],粒[li4]"
-        ],
+        "itemSimp":"冰雹",
         "stats":{ "read":false, "timesSeen":0, "timesCorrect":0 },
-    }
+    };
 
     // Todo: flesh out the API calls
+    let apiURL, char1URL, char2URL, vocabTrueURL, vocabFalseURL, store;
+
+    beforeEach(() => {
+        // Mocking the calls
+        apiURL = nock("http://localhost:8080");
+        char1URL = apiURL
+            .get(`/api/char/${char1.charTrad}`)
+            .reply(200, char1);
+        char2URL = apiURL
+            .get(`/api/char/${char2.charTrad}`)
+            .reply(200, char2);
+        vocabTrueURL = apiURL
+            .get(`/api/vocab/${vocab.itemTrad}`)
+            .reply(200, vocab);
+        vocabFalseURL = apiURL
+            .get("/api/vocab/a")
+            .reply(404, {});
+
+        // Prepare the store with a current vocabulary item
+        store = storeFactory({
+            currVocab: {
+                "itemTrad" : "如火",
+                "itemSimp" : "如火",
+                "stats" : {
+                    "read" : false,
+                    "timesSeen" : 0,
+                    "timesCorrect" : 0
+                }
+            }
+        });
+    });
+
+    afterEach(() => {
+        nock.cleanAll();
+    });
+
+    describe("changing state", () => {
+        // Successful change
+        it("should change the current vocabulary item", (done) => {
+            store.dispatch(query("冰雹", "vocab"))
+                .then(() => {
+                    expect(store.getState().currVocab.itemTrad).to.equal(vocab.itemTrad);
+                    done();
+                });
+        });
+
+        // Unsuccessful change
+        it("should return the exact same character", (done) => {
+            const itemBefore = store.getState().currVocab.itemTrad;
+            store.dispatch(query("a", "vocab"))
+                .then(() => {
+                    expect(store.getState().currVocab.itemTrad).to.equal(itemBefore);
+                    done();
+                });
+        });
+    });
 });

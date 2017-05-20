@@ -9,5 +9,45 @@
     "absoluteNumber": 1,
     "keyword": "one",
     "pinyin": "yī"
+  },
+  "currVocab": {
+    "itemTrad" : "一",
+    "itemSimp" : "一",
+    "pinyin" : [
+      "yi1"
+    ],
+    "definitions" : [
+      "one",
+      "1",
+      "single",
+      "a (article)",
+      "as soon as",
+      "entire",
+      "whole",
+      "all",
+      "throughout",
+      "\"one\" radical in Chinese characters (Kangxi radical 1)",
+      "also pr. [yao1] for greater clarity when spelling out numbers digit by digit"
+    ],
+    "numbers" : {
+      "lesson" : [
+        1
+      ],
+      "heisig" : [
+        1
+      ],
+      "absolute" : [
+        1
+      ]
+    },
+    "stats" : {
+      "read" : false,
+      "timesSeen" : 0,
+      "timesCorrect" : 0
+    },
+    "showFirstAt" : {
+      "lesson" : 1,
+      "absolute" : 1
+    }
   }
 }
