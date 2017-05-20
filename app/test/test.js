@@ -9,35 +9,6 @@ import {query} from "../actions";
 import sinon from "sinon";
 import nock from "nock";
 
-// Mock API for vocabulary retrieval
-const vocabApi = nock("http://localhost:8080")
-    .get("/api/vocab/以為")
-    .reply(200, {
-        "itemTrad" : "以為",
-        "itemSimp" : "以为",
-        "pinyin" : [ "yi3 wei2" ],
-        "definitions" : [ "to believe", "to think", "to consider", "to be under the impression" ],
-        "char" : [ "以", "為" ],
-        "numbers" : {
-            "lesson" : [ 27, 51 ],
-            "heisig" : [ 796, 1385 ],
-            "absolute" : [ 1358, 2666 ]
-        },
-        "stats" : {
-            "read" : false,
-            "timesSeen" : 0,
-            "timesCorrect" : 0
-        },
-        "srs" : {
-            "difficulty" : 0.3,
-            "daysBetweenReviews" : 0
-        },
-        "showFirstAt" : {
-            "lesson" : 51, "absolute" : 2666
-        }
-    });
-
-
 // Testing on-click toggle between traditional and simplified characters
 describe("toggling character", () => {
     let showTradState, action;
@@ -161,4 +132,36 @@ describe("changing lesson", () => {
         const result = currLesson(lesson, action);
         expect(result).to.equal(3);
     })
+});
+
+/*
+ LARGE number of vocabulary items, so make learning about character readings instead of vocabulary
+ Implying that document structure should change
+ */
+
+// Find appropriate vocabulary
+describe("vocabulary", () => {
+    const char1 = {
+        "charTrad":"雹",
+        "stats":{"read":false, "timesSeen":0, "timesCorrect":0},
+        "srs":{ "difficulty":0.3, "daysBetweenReviews":0 }
+    },
+    char2 = {
+        "charTrad" : "冰",
+        "stats" : { "read" : false, "timesSeen" : 0, "timesCorrect" : 0 },
+        "srs": { "difficulty" : 0.3, "daysBetweenReviews" : 0 },
+    };
+
+    const vocab = {
+        "itemTrad":"冰雹",
+        "pinyin":["bing1 bao2"],
+        "definitions":[
+            "hail",
+            "hailstone",
+            "CL:場|场[chang2],粒[li4]"
+        ],
+        "stats":{ "read":false, "timesSeen":0, "timesCorrect":0 },
+    }
+
+    // Todo: flesh out the API calls
 });
