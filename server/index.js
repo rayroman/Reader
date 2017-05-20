@@ -6,7 +6,8 @@ const MongoClient = require("mongodb").MongoClient,
     cors = require("cors"),
     bodyParser = require("body-parser"),
     url = "mongodb://localhost:27017/reader",
-    routerWithDB = require("./apiRouter");
+    charRouterWithDB = require("./apiCharRouter"),
+    vocabRouterWithDB = require("./apiVocabRouter");
 
 const app = express();
 
@@ -27,7 +28,8 @@ app.use(logRequest)
 
 MongoClient.connect(url)
     .then(db => {
-        app.use("/api", routerWithDB(db));
+        app.use("/api", charRouterWithDB(db));
+        app.use("/api", vocabRouterWithDB(db));
         console.log("Successfully connected to MongoDB server!");
         app.get("/", (req, res) => {
                 res.send("Welcome!\n");

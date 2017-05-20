@@ -1,14 +1,15 @@
 /**
  * Created by rroman681 on 5/11/17.
  * Primarily for code chunking: keep the API-level router stuff in a separate file.
+ * Use for character API
  */
 const express = require("express");
 
 const router = express.Router();
 
-const routerWithDB = db => {
-    const character = db.collection("character"),
-        vocabulary = db.collection("vocabulary");
+// Todo: Consolidate & compose the two API files
+const charRouterWithDB = db => {
+    const character = db.collection("character");
 
     // Get a specific character
     router.get("/char/:char", (req, res) => {
@@ -51,4 +52,4 @@ const routerWithDB = db => {
     return router;
 };
 
-module.exports = routerWithDB;
+module.exports = charRouterWithDB;
