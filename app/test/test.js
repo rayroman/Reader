@@ -5,7 +5,7 @@ import {expect} from "chai";
 import C from "../constants"
 import {isTrad, currLesson} from "../store/reducers";
 import storeFactory from "../store/index";
-import {query} from "../actions";
+import {charQuery, vocabQuery} from "../actions";
 import sinon from "sinon";
 import nock from "nock";
 
@@ -97,7 +97,7 @@ describe("character database", () => {
     describe("changing state", () => {
         // Successful change
         it("should change the current character", (done) => {
-            store.dispatch(query("命", "char"))
+            store.dispatch(charQuery("命"))
                 .then(() => {
                     expect(store.getState().currChar.charTrad).to.equal("命");
                     done();
@@ -107,7 +107,7 @@ describe("character database", () => {
         // unsuccessful change
         it("should return the exact same character upon unsuccessful fetch", (done) => {
             const charBefore = store.getState().currChar.charTrad;
-            store.dispatch(query("a", "char"))
+            store.dispatch(charQuery("a"))
                 .then(() => {
                     expect(store.getState().currChar.charTrad).to.equal(charBefore);
                     done();
@@ -197,7 +197,7 @@ describe("vocabulary", () => {
     describe("changing state", () => {
         // Successful change
         it("should change the current vocabulary item", (done) => {
-            store.dispatch(query("冰雹", "vocab"))
+            store.dispatch(vocabQuery("冰雹"))
                 .then(() => {
                     expect(store.getState().currVocab.itemTrad).to.equal(vocab.itemTrad);
                     done();
@@ -207,7 +207,7 @@ describe("vocabulary", () => {
         // Unsuccessful change
         it("should return the exact same character", (done) => {
             const itemBefore = store.getState().currVocab.itemTrad;
-            store.dispatch(query("a", "vocab"))
+            store.dispatch(vocabQuery("a"))
                 .then(() => {
                     expect(store.getState().currVocab.itemTrad).to.equal(itemBefore);
                     done();

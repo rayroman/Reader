@@ -17,10 +17,9 @@ export const returnQuery = item => ({
 
 /***
  * Dispatch a query that depends on the collection you want.
- * @param item - what item you want
  * @param coll - which collection you want to search (either character or vocabulary)
  */
-export const query = (item, coll) => (dispatch, getState) => {
+export const query = coll => item => (dispatch, getState) => {
     dispatch({
         type: C.FETCH_ITEM
     });
@@ -41,3 +40,9 @@ export const query = (item, coll) => (dispatch, getState) => {
         })
         .catch(err => console.log(err.stack));
 };
+
+// Find in character collection
+export const charQuery = query("char");
+
+// Find in vocabulary collection
+export const vocabQuery = query("vocab");
