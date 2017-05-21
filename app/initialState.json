@@ -1,6 +1,7 @@
 {
   "isTrad": true,
   "fetching": false,
+  "testing": true,
   "currChar": {
     "charTrad": "一",
     "charSimp": "一",

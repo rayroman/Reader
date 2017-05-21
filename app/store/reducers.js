@@ -4,17 +4,14 @@
 import C from "../constants";
 import {combineReducers} from "redux";
 
-/***
- * Toggle between traditional and simplified representation of characters
- * @param state
- * @param action
- */
+// Toggle between traditional and simplified characters
 export const isTrad = (state = true, action) => {
     return (action.type === C.TOGGLE_TRADITIONAL) ?
         !state :
         state;
 };
 
+// See if we're fetching anything from the API
 export const fetching = (state = false, action) => {
     switch(action.type) {
         case C.FETCH_ITEM:
@@ -26,13 +23,16 @@ export const fetching = (state = false, action) => {
             return state;
     }
 };
-
 export const currLesson = (state = 1, action) => {
     return (action.type === C.CHANGE_LESSON) ?
         action.payload :
         state;
 };
 
+// Was the guess correct?
+// Todo: add guessing reducer
+
+// What is the current character?
 export const currChar = (state = {}, action) => {
     switch(action.type) {
         case C.CLEAR_ITEM:

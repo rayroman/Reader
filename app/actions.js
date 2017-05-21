@@ -15,6 +15,17 @@ export const returnQuery = item => ({
     payload: item
 });
 
+// Switch between testing and studying mode
+export const toggleTesting = () => ({
+    type: C.TOGGLE_TESTING
+});
+
+// Submit a guess to be validated
+export const submitGuess = guess => ({
+    type: C.SUBMIT_GUESS,
+    payload: guess
+});
+
 /***
  * Dispatch a query that depends on the collection you want.
  * @param coll - which collection you want to search (either character or vocabulary)
