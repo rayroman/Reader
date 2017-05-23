@@ -8,6 +8,7 @@ import "../stylesheets/character.scss";
 import FaKey from "react-icons/lib/fa/key";
 import FaVolumeUp from "react-icons/lib/fa/volume-up";
 import SearchForm from "./SearchForm";
+import GuessForm from "./GuessForm"
 
 // Stateless component
 const CharacterItem = ({showTrad, onChangeChar = f => f, toggleChar = f => f, character}) => {
@@ -31,7 +32,7 @@ const CharacterItem = ({showTrad, onChangeChar = f => f, toggleChar = f => f, ch
                 </section>
             </section>
             <section>
-                <SearchForm onChangeChar={onChangeChar}/>
+                <GuessForm/>
             </section>
         </article>
     )

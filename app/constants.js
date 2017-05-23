@@ -13,7 +13,8 @@ const constant = {
     CHANGE_ITEM: "CHANGE_ITEM",
     CLEAR_ITEM: "CLEAR_ITEM",
     CHANGE_LESSON: "CHANGE_LESSON",
-    SUBMIT_GUESS: "SUBMIT_GUESS"
+    SUBMIT_GUESS: "SUBMIT_GUESS",
+    VALIDATE_GUESS: "VALIDATE_GUESS"
 };
 
 export default constant;

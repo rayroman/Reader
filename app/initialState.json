@@ -3,6 +3,10 @@
     "showTraditional": true,
     "isFetching": false
   },
+  "guess": {
+    "mostRecent": "",
+    "isCorrect": null
+  },
   "currentItem": {
     "char": {
       "collection": "character",

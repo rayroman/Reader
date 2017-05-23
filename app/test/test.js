@@ -5,7 +5,8 @@ import {expect} from "chai";
 import C from "../constants"
 import {isTrad, currLesson} from "../store/reducers";
 import storeFactory from "../store/index";
-import {charQuery, vocabQuery} from "../actions";
+import {charQuery, vocabQuery, submitGuess} from "../actions";
+import {getCorrect} from "../selectors";
 import sinon from "sinon";
 import nock from "nock";
 
@@ -215,3 +216,40 @@ describe("changing lesson", () => {
 //         });
 //     });
 // });
+
+// Testing guess selectors
+describe("selectors", () => {
+    let goodGuess, badGuess, store;
+    beforeEach(() => {
+        goodGuess = "yī";
+        badGuess = "aaa";
+        store = storeFactory({
+            currentItem: {
+                char: {
+                    pinyin: ["yī"]
+                }
+            },
+            guess: {
+                mostRecent: "",
+                isCorrect: null
+            }
+        });
+    });
+
+    // changing the guess
+    describe("updating guess", () => {
+        it("should update the guess to the most recently submitted item", () => {
+            store.dispatch(submitGuess(goodGuess));
+            expect(store.getState().guess.mostRecent).to.equal(goodGuess);
+        });
+    });
+
+    // Processing the guess
+    describe("processing guess", () => {
+        it("should change the isCorrect field from null to true", () => {
+            store.dispatch(submitGuess(goodGuess));
+            const result = getCorrect("char")(store.getState());
+            expect(result).to.equal(true);
+        });
+    });
+});

@@ -29,8 +29,18 @@ export const currLesson = (state = 1, action) => {
         state;
 };
 
-// Was the guess correct?
-// Todo: add guessing reducer
+// Handling the guesses
+export const updateGuess = (state = "", action) => {
+    return (action.type === C.SUBMIT_GUESS) ?
+        action.payload :
+        state;
+};
+
+export const validateGuess = (state = null, action) => {
+    return (action.type === C.VALIDATE_GUESS) ?
+        action.payload :
+        state
+};
 
 // What is the current character?
 export const currItem = coll => (state = {}, action) => {
@@ -49,6 +59,10 @@ export default combineReducers({
     ui: combineReducers({
         showTraditional: isTrad,
         isFetching: fetching
+    }),
+    guess: combineReducers({
+        mostRecent: updateGuess,
+        isCorrect: validateGuess
     }),
     currentItem: combineReducers({
         char: currItem("character"),
