@@ -33,12 +33,12 @@ export const currLesson = (state = 1, action) => {
 // Todo: add guessing reducer
 
 // What is the current character?
-export const currChar = (state = {}, action) => {
+export const currItem = coll => (state = {}, action) => {
     switch(action.type) {
         case C.CLEAR_ITEM:
             return state;
         case C.RETURN_ITEM:
-            return action.payload;
+            return Object.assign({}, action.payload, {collection: coll});
 
         default:
             return state;
@@ -51,7 +51,7 @@ export default combineReducers({
         isFetching: fetching
     }),
     currentItem: combineReducers({
-        char: currChar,
-        vocab: currChar
+        char: currItem("character"),
+        vocab: currItem("vocabulary")
     })
 });

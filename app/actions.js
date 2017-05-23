@@ -37,7 +37,6 @@ const query = coll => item => (dispatch, getState) => {
 
     return fetch(`http://localhost:8080/api/${coll}/${item}`)
         .then(res => {
-            console.log(res);
             // Return if something is found
             return (res.status === 200) ?
                 res.json() :
@@ -45,6 +44,8 @@ const query = coll => item => (dispatch, getState) => {
                 getState().currentItem[`${coll}`];
         })
         .then((itemInfo) => {
+            console.log("item: ", itemInfo);
+            console.log("state: ", getState());
             dispatch(returnQuery(itemInfo));
             dispatch({
                 type: C.CANCEL_FETCH

@@ -5,6 +5,7 @@
   },
   "currentItem": {
     "char": {
+      "collection": "character",
       "pinyin" : [
         "yī"
       ],
@@ -29,6 +30,7 @@
       }
     },
     "vocab": {
+      "collection": "vocabulary",
       "item" : {
         "traditional" : "一",
         "simplified" : "一"

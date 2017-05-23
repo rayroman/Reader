@@ -7,6 +7,7 @@ import Hanzi from "./Hanzi";
 import "../stylesheets/character.scss";
 import FaKey from "react-icons/lib/fa/key";
 import FaVolumeUp from "react-icons/lib/fa/volume-up";
+import SearchForm from "./SearchForm";
 
 // Stateless component
 const CharacterItem = ({showTrad, onChangeChar = f => f, toggleChar = f => f, character}) => {
@@ -29,6 +30,9 @@ const CharacterItem = ({showTrad, onChangeChar = f => f, toggleChar = f => f, ch
                     <h2><FaVolumeUp/> <span className="space">{character.pinyin[0]}</span></h2> {/* Todo: change this to show list of all pronunciations when I cross that bridge */}
                 </section>
             </section>
+            <section>
+                <SearchForm onChangeChar={onChangeChar}/>
+            </section>
         </article>
     )
 };
@@ -41,7 +45,11 @@ CharacterItem.propTypes = {
             simplified: PropTypes.string.isRequired,
             traditional: PropTypes.string.isRequired
         }),
-        numbers: PropTypes.objectOf(PropTypes.number).isRequired
+        numbers: PropTypes.shape({
+            lesson: PropTypes.number,
+            heisig: PropTypes.number,
+            absolute: PropTypes.number
+        })
     })
 };
 
