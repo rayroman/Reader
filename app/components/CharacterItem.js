@@ -9,23 +9,24 @@ import FaKey from "react-icons/lib/fa/key";
 import FaVolumeUp from "react-icons/lib/fa/volume-up";
 
 // Stateless component
-const CharacterItem = ({showTrad, toggleChar = f => f, currChar}) => {
-    const vol = currChar.heisigNumber <= 1500 ? "I" : "II";
+const CharacterItem = ({showTrad, onChangeChar = f => f, toggleChar = f => f, character}) => {
+    const {lesson, heisig, absolute} = character.numbers;
+    const vol = heisig <= 1500 ? "I" : "II";
     return (
         <article>
-            <Hanzi charTrad={currChar.charTrad}
-                   charSimp={currChar.charSimp}
+            <Hanzi charTrad={character.item.traditional}
+                   charSimp={character.item.simplified}
                    showTrad={showTrad}
                    onToggle={toggleChar}
             />
             <section className="heisigInfo">
                 <section className="lookup rowChildren">
-                    <h2><FaKey/> <span className="keyword space">{currChar.keyword}</span></h2>
-                    <div>Lesson {currChar.lessonNumber} ({vol}), #{currChar.heisigNumber}</div>
-                    <div className="extraInfo"><small>(absolute: #{currChar.absoluteNumber})</small></div>
+                    <h2><FaKey/> <span className="keyword space">{character.keyword}</span></h2>
+                    <div>Lesson {lesson} ({vol}), #{heisig}</div>
+                    <div className="extraInfo"><small>(absolute: #{absolute})</small></div>
                 </section>
                 <section className="pinyin rowChildren">
-                    <h2><FaVolumeUp/> <span className="space">{currChar.pinyin}</span></h2>
+                    <h2><FaVolumeUp/> <span className="space">{character.pinyin[0]}</span></h2> {/* Todo: change this to show list of all pronunciations when I cross that bridge */}
                 </section>
             </section>
         </article>
@@ -33,13 +34,14 @@ const CharacterItem = ({showTrad, toggleChar = f => f, currChar}) => {
 };
 
 CharacterItem.propTypes = {
-    currChar: PropTypes.shape({
-        charTrad: PropTypes.string.isRequired,
-        charSimp: PropTypes.string.isRequired,
-        lessonNumber: PropTypes.number.isRequired,
-        heisigNumber: PropTypes.number.isRequired,
-        absoluteNumber: PropTypes.number.isRequired,
+    character: PropTypes.shape({
         keyword: PropTypes.string.isRequired,
+        pinyin: PropTypes.array.isRequired,
+        item: PropTypes.shape({
+            simplified: PropTypes.string.isRequired,
+            traditional: PropTypes.string.isRequired
+        }),
+        numbers: PropTypes.objectOf(PropTypes.number).isRequired
     })
 };
 

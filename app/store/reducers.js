@@ -46,8 +46,12 @@ export const currChar = (state = {}, action) => {
 };
 
 export default combineReducers({
-    isTrad,
-    fetching,
-    currChar,
-    currVocab: currChar
+    ui: combineReducers({
+        showTraditional: isTrad,
+        isFetching: fetching
+    }),
+    currentItem: combineReducers({
+        char: currChar,
+        vocab: currChar
+    })
 });

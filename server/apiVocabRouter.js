@@ -11,10 +11,13 @@ const vocabRouterWithDB = db => {
 
     // Get a specific vocabulary item
     router.get("/vocab/:vocab", (req, res) => {
-        const char = req.params.vocab;
+        const vocab = req.params.vocab;
 
         // Allow for both simplified and traditional, so can search either one
-        vocab.find({$or: [{itemTrad: char}, {itemSimp: char}]})
+        vocab.find({$or: [
+            {"item.traditional": vocab},
+            {"item.simplified": vocab}
+        ]})
             .toArray()
             .then(results => {
                 results.length > 0 ?
