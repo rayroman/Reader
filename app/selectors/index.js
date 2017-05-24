@@ -15,10 +15,14 @@ const getGuess = state => state.guess;
 export const getCorrect = coll => createSelector(
     [getCurrentItem(coll), getGuess],
     (item, guess) => {
-        for (let p of item.pinyin) {
-            if (guess.mostRecent === p) return true;
+        if (guess.mostRecent === "") {
+            return null;
+        } else {
+            for (let p of item.pinyin) {
+                if (guess.mostRecent === p) return true;
+            }
+            return false;
         }
-        return false;
     }
 );
 

@@ -2,7 +2,7 @@
  * Created by rroman681 on 5/17/17.
  */
 
-const GuessForm = ({isCorrect = true, processGuess = f => f}) => {
+const GuessForm = ({isCorrect = null, processGuess = f => f}) => {
     let guess;
 
     const submit = e => {
@@ -20,7 +20,7 @@ const GuessForm = ({isCorrect = true, processGuess = f => f}) => {
                    ref={input => guess = input}
             />
             {(isCorrect === null) ?
-                "null" : (isCorrect) ?
+                "" : (isCorrect) ?
                     "good job!" :
                     "oh no!"
             }
