@@ -29,16 +29,26 @@ export const currLesson = (state = 1, action) => {
         state;
 };
 
-// Was the guess correct?
-// Todo: add guessing reducer
+// Handling the guesses
+export const updateGuess = (state = "", action) => {
+    return (action.type === C.SUBMIT_GUESS) ?
+        action.payload :
+        state;
+};
+
+export const validateGuess = (state = null, action) => {
+    return (action.type === C.VALIDATE_GUESS) ?
+        action.payload :
+        state
+};
 
 // What is the current character?
-export const currChar = (state = {}, action) => {
+export const currItem = coll => (state = {}, action) => {
     switch(action.type) {
         case C.CLEAR_ITEM:
             return state;
         case C.RETURN_ITEM:
-            return action.payload;
+            return Object.assign({}, action.payload, {collection: coll});
 
         default:
             return state;
@@ -46,8 +56,16 @@ export const currChar = (state = {}, action) => {
 };
 
 export default combineReducers({
-    isTrad,
-    fetching,
-    currChar,
-    currVocab: currChar
+    ui: combineReducers({
+        showTraditional: isTrad,
+        isFetching: fetching
+    }),
+    guess: combineReducers({
+        mostRecent: updateGuess,
+        isCorrect: validateGuess
+    }),
+    currentItem: combineReducers({
+        char: currItem("character"),
+        vocab: currItem("vocabulary")
+    })
 });

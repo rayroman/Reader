@@ -16,7 +16,10 @@ const charRouterWithDB = db => {
         const char = req.params.char;
 
         // Allow for both simplified and traditional, so can search either one
-        character.find({$or: [{charTrad: char}, {charSimp: char}]})
+        character.find({$or: [
+            {"item.traditional": char},
+            {"item.simplified": char}
+            ]})
             .toArray()
             .then(results => {
                 results.length > 0 ?
@@ -27,7 +30,10 @@ const charRouterWithDB = db => {
         //Delete character
         .delete("/char/:char", (req, res) => {
             const char = req.params.char;
-            character.deleteMany({$or: [{charTrad: char}, {charSimp: char}]})
+            character.deleteMany({$or: [
+                {"item.traditional": char},
+                {"item.simplified": char}
+            ]})
                 .then(results => {
                     res.send(results);
                 });

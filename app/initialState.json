@@ -1,54 +1,80 @@
 {
-  "isTrad": true,
-  "fetching": false,
-  "testing": true,
-  "currChar": {
-    "charTrad": "一",
-    "charSimp": "一",
-    "lessonNumber": 1,
-    "heisigNumber": 1,
-    "absoluteNumber": 1,
-    "keyword": "one",
-    "pinyin": "yī"
+  "ui": {
+    "showTraditional": true,
+    "isFetching": false
   },
-  "currVocab": {
-    "itemTrad" : "一",
-    "itemSimp" : "一",
-    "pinyin" : [
-      "yi1"
-    ],
-    "definitions" : [
-      "one",
-      "1",
-      "single",
-      "a (article)",
-      "as soon as",
-      "entire",
-      "whole",
-      "all",
-      "throughout",
-      "\"one\" radical in Chinese characters (Kangxi radical 1)",
-      "also pr. [yao1] for greater clarity when spelling out numbers digit by digit"
-    ],
-    "numbers" : {
-      "lesson" : [
-        1
+  "guess": {
+    "mostRecent": "",
+    "isCorrect": null
+  },
+  "currentItem": {
+    "char": {
+      "collection": "character",
+      "pinyin" : [
+        "yī"
       ],
-      "heisig" : [
-        1
+      "keyword" : "one",
+      "item" : {
+        "simplified" : "一",
+        "traditional" : "一"
+      },
+      "numbers" : {
+        "lesson" : 1,
+        "heisig" : 1,
+        "absolute" : 1
+      },
+      "stats" : {
+        "read" : false,
+        "timesSeen" : 0,
+        "timesCorrect" : 0
+      },
+      "srs" : {
+        "difficulty" : 0.3,
+        "daysBetweenReviews" : 0
+      }
+    },
+    "vocab": {
+      "collection": "vocabulary",
+      "item" : {
+        "traditional" : "一",
+        "simplified" : "一"
+      },
+      "pinyin" : [
+        "yi1"
       ],
-      "absolute" : [
-        1
-      ]
-    },
-    "stats" : {
-      "read" : false,
-      "timesSeen" : 0,
-      "timesCorrect" : 0
-    },
-    "showFirstAt" : {
-      "lesson" : 1,
-      "absolute" : 1
+      "definitions" : [
+        "one",
+        "1",
+        "single",
+        "a (article)",
+        "as soon as",
+        "entire",
+        "whole",
+        "all",
+        "throughout",
+        "\"one\" radical in Chinese characters (Kangxi radical 1)",
+        "also pr. [yao1] for greater clarity when spelling out numbers digit by digit"
+      ],
+      "numbers" : {
+        "lesson" : [
+          1
+        ],
+        "heisig" : [
+          1
+        ],
+        "absolute" : [
+          1
+        ]
+      },
+      "stats" : {
+        "read" : false,
+        "timesSeen" : 0,
+        "timesCorrect" : 0
+      },
+      "showFirstAt" : {
+        "lesson" : 1,
+        "absolute" : 1
+      }
     }
   }
 }

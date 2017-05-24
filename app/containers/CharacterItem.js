@@ -3,11 +3,11 @@
  */
 import CharacterItem from "../components/CharacterItem";
 import {connect} from "react-redux";
-import {toggleChar, query} from "../actions";
+import {toggleChar, charQuery} from "../actions";
 
 const mapStateToProps = (state, props) => ({
-    showTrad: state.isTrad,
-    currChar: state.currChar
+    showTrad: state.ui.showTraditional,
+    character: state.currentItem.char
 });
 
 const mapDispatchToProps = dispatch => ({
@@ -15,7 +15,7 @@ const mapDispatchToProps = dispatch => ({
         dispatch(toggleChar())
     },
     onChangeChar(item) {
-        dispatch(query(item))
+        dispatch(charQuery(item))
     }
 });
 

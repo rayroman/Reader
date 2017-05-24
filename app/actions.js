@@ -30,7 +30,7 @@ export const submitGuess = guess => ({
  * Dispatch a query that depends on the collection you want.
  * @param coll - which collection you want to search (either character or vocabulary)
  */
-export const query = coll => item => (dispatch, getState) => {
+const query = coll => item => (dispatch, getState) => {
     dispatch({
         type: C.FETCH_ITEM
     });
@@ -41,15 +41,17 @@ export const query = coll => item => (dispatch, getState) => {
             return (res.status === 200) ?
                 res.json() :
                 // Return original state if not
-                getState()[`curr${coll.charAt(0).toUpperCase() + coll.slice(1)}`];
+                getState().currentItem[`${coll}`];
         })
         .then((itemInfo) => {
+            console.log("item: ", itemInfo);
+            console.log("state: ", getState());
             dispatch(returnQuery(itemInfo));
             dispatch({
                 type: C.CANCEL_FETCH
             })
         })
-        .catch(err => console.log(err.stack));
+        .catch(err => console.log(err));
 };
 
 // Find in character collection
