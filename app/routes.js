@@ -3,13 +3,15 @@
  */
 import React from "react";
 import {BrowserRouter as Router, Route, Link} from "react-router-dom";
+import Sidebar from "./components/Sidebar";
+import CharacterItem from "./containers/CharacterItem";
 
 // Route configuration: will add more as necessary. For now, just need testing and searching
 const routes = [
     {
         path: "/",
         exact: true,
-        component: null // Todo: fill in later
+        component: CharacterItem // Todo: fill in later
     },
     {
         path: "/study",
@@ -21,3 +23,4 @@ const routes = [
     }
 ];
 
+export default Sidebar(routes);

@@ -1,0 +1,36 @@
+@import "./main.scss";
+
+nav#sidebar {
+  position: fixed;
+  background-color: darken($themeBlue, 5%);
+  left: 0;
+  top: 0;
+  width: 250px;
+  height: 100%;
+
+  ul {
+    list-style-type: none;
+    padding: 0;
+
+    li:first-of-type {
+      border-top: solid 1px $themeBlue;
+    }
+
+    li {
+      border-bottom: solid 1px $themeBlue;
+      a {
+        color: $themeWhite;
+        text-decoration: none;
+        padding: 10px 10px 10px 20px;
+        display: block;
+      }
+
+      .active {
+        background-color: darken($themeBlue, 1%);
+        svg {
+          fill: $themeRed;
+        }
+      }
+    }
+  }
+}

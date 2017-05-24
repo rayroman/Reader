@@ -9,6 +9,7 @@ import defaultState from "./initialState.json";
 import storeFactory from "./store";
 import "./stylesheets/main.scss"
 import GuessForm from "./containers/GuessForm";
+import routes from "./routes";
 
 // Allow React to be a global object
 window.React = React;
@@ -16,9 +17,6 @@ window.React = React;
 // Render it
 ReactDOM.render(
     <Provider store={storeFactory(defaultState)}>
-        <div>
-            <CharacterItem/>
-            <GuessForm/>
-        </div>
+        {routes}
     </Provider>,
     document.getElementById("react-container"));
