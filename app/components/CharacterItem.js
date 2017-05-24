@@ -31,9 +31,6 @@ const CharacterItem = ({showTrad, onChangeChar = f => f, toggleChar = f => f, ch
                     <h2><FaVolumeUp/> <span className="space">{character.pinyin[0]}</span></h2> {/* Todo: change this to show list of all pronunciations when I cross that bridge */}
                 </section>
             </section>
-            <section>
-                <GuessForm/>
-            </section>
         </article>
     )
 };
