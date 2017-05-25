@@ -5,6 +5,7 @@ import React from "react";
 import {BrowserRouter as Router, Route, Link} from "react-router-dom";
 import Sidebar from "./components/Sidebar";
 import CharacterItem from "./containers/CharacterItem";
+import Search from "./containers/Search"
 
 // Route configuration: will add more as necessary. For now, just need testing and searching
 const routes = [
@@ -19,7 +20,7 @@ const routes = [
     },
     {
         path: "/search",
-        component: null
+        component: CharacterItem
     }
 ];
 

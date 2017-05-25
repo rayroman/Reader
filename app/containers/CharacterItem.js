@@ -13,9 +13,6 @@ const mapStateToProps = (state, props) => ({
 const mapDispatchToProps = dispatch => ({
     toggleChar() {
         dispatch(toggleChar())
-    },
-    onChangeChar(item) {
-        dispatch(charQuery(item))
     }
 });
 

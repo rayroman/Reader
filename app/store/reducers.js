@@ -42,7 +42,20 @@ export const validateGuess = (state = null, action) => {
         state
 };
 
-// What is the current character?
+// Handling the searches
+export const updateSearchResult = (state = {}, action) => {
+    return (action.type === C.UPDATE_SEARCH_RESULT) ?
+        action.payload :
+        state
+};
+
+export const updateSearchCollection = (state = "character", action) => {
+    return (action.type === C.UPDATE_SEARCH_COLLECTION) ?
+        action.payload :
+        state
+};
+
+// What is the current TESTING character?
 export const currItem = coll => (state = {}, action) => {
     switch(action.type) {
         case C.CLEAR_ITEM:
@@ -63,6 +76,10 @@ export default combineReducers({
     guess: combineReducers({
         mostRecent: updateGuess,
         isCorrect: validateGuess
+    }),
+    search: combineReducers({
+        collection: updateSearchCollection,
+        item: updateSearchResult
     }),
     currentItem: combineReducers({
         char: currItem("character"),

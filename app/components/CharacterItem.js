@@ -11,7 +11,7 @@ import SearchForm from "./SearchForm";
 import GuessForm from "./GuessForm"
 
 // Stateless component
-const CharacterItem = ({showTrad, onChangeChar = f => f, toggleChar = f => f, character}) => {
+const CharacterItem = ({showTrad, toggleChar = f => f, character}) => {
     const {lesson, heisig, absolute} = character.numbers;
     const vol = heisig <= 1500 ? "I" : "II";
     return (

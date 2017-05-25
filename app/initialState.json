@@ -7,6 +7,10 @@
     "mostRecent": "",
     "isCorrect": null
   },
+  "search": {
+    "collection": "character",
+    "item": {}
+  },
   "currentItem": {
     "char": {
       "collection": "character",

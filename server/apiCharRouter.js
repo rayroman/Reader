@@ -12,7 +12,7 @@ const charRouterWithDB = db => {
     const character = db.collection("character");
 
     // Get a specific character
-    router.get("/char/:char", (req, res) => {
+    router.get("/character/:char", (req, res) => {
         const char = req.params.char;
 
         // Allow for both simplified and traditional, so can search either one
@@ -28,7 +28,7 @@ const charRouterWithDB = db => {
             });
     })
         //Delete character
-        .delete("/char/:char", (req, res) => {
+        .delete("/character/:char", (req, res) => {
             const char = req.params.char;
             character.deleteMany({$or: [
                 {"item.traditional": char},
@@ -39,7 +39,7 @@ const charRouterWithDB = db => {
                 });
         })
         //Get all characters
-        .get("/char", (req, res) => {
+        .get("/character", (req, res) => {
             character.find({})
                 .toArray()
                 .then(results => {
@@ -47,7 +47,7 @@ const charRouterWithDB = db => {
                 })
         })
         // Insert a character
-        .post("/char", (req, res) => {
+        .post("/character", (req, res) => {
             console.log(req.body);
             character.insertOne(req.body)
                 .then(result => {

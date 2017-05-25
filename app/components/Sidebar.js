@@ -3,10 +3,11 @@
  */
 import React from "react";
 import {BrowserRouter as Router, NavLink, Route} from "react-router-dom";
-import createBrowserHistory from "history/createBrowserHistory";
+import createHashHistory from "history/createHashHistory";
 import Home from "react-icons/lib/fa/home";
 import Pencil from "react-icons/lib/fa/pencil";
 import Cogs from "react-icons/lib/fa/cogs";
+import Search from "react-icons/lib/md/search";
 import "../stylesheets/sidebar.scss";
 
 const ShiftedIcon = Component => (
@@ -27,13 +28,14 @@ const Sidebar = routeData => {
     });
 
     return (
-        <Router history={createBrowserHistory()}>
+        <Router history={createHashHistory()}>
             <div>
                 <nav id="sidebar">
                     <h1>Reader</h1>
                     <ul id="navLinks">
                         <li><NavLink exact to="/">{ShiftedIcon(Home)} Home</NavLink></li>
                         <li><NavLink to="/study">{ShiftedIcon(Pencil)} Study</NavLink></li>
+                        <li><NavLink to="/search">{ShiftedIcon(Search)} Search</NavLink></li>
                         <li><NavLink to="/edit">{ShiftedIcon(Cogs)} Under the Hood</NavLink></li>
                     </ul>
                 </nav>

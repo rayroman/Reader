@@ -10,7 +10,7 @@ const vocabRouterWithDB = db => {
     const vocab = db.collection("vocabulary");
 
     // Get a specific vocabulary item
-    router.get("/vocab/:vocab", (req, res) => {
+    router.get("/vocabulary/:vocab", (req, res) => {
         const vocab = req.params.vocab;
 
         // Allow for both simplified and traditional, so can search either one

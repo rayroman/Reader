@@ -26,8 +26,14 @@ export const submitGuess = guess => ({
     payload: guess
 });
 
+// Updating search results
+export const searchResult = item => ({
+    type: C.UPDATE_SEARCH_RESULT,
+    payload: item
+});
+
 /***
- * Dispatch a query that depends on the collection you want.
+ * Dispatch a query that depends on the collection you want. This updates the search state
  * @param coll - which collection you want to search (either character or vocabulary)
  */
 const query = coll => item => (dispatch, getState) => {
@@ -41,12 +47,16 @@ const query = coll => item => (dispatch, getState) => {
             return (res.status === 200) ?
                 res.json() :
                 // Return original state if not
-                getState().currentItem[`${coll}`];
+                getState().search.item;
         })
         .then((itemInfo) => {
             console.log("item: ", itemInfo);
             console.log("state: ", getState());
-            dispatch(returnQuery(itemInfo));
+            dispatch(searchResult(itemInfo));
+            dispatch({
+                type: C.UPDATE_SEARCH_COLLECTION,
+                payload: coll
+            });
             dispatch({
                 type: C.CANCEL_FETCH
             })
@@ -55,7 +65,7 @@ const query = coll => item => (dispatch, getState) => {
 };
 
 // Find in character collection
-export const charQuery = query("char");
+export const charQuery = query("character");
 
 // Find in vocabulary collection
-export const vocabQuery = query("vocab");
+export const vocabQuery = query("vocabulary");
