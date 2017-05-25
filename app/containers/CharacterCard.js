@@ -5,7 +5,7 @@ import {connect} from "react-redux";
 import CharacterCard from "../components/CharacterCard";
 
 const mapStateToProps = state => ({
-    isTraditional: state.ui.isTraditional
+    isTraditional: state.ui.showTraditional
 });
 
 export default connect(mapStateToProps)(CharacterCard);

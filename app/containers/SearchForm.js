@@ -6,7 +6,7 @@ import {connect} from "react-redux";
 import SearchForm from "../components/SearchForm";
 import {charQuery} from "../actions";
 
-const mapStateToProps = state => {};
+const mapStateToProps = state => state;
 
 const mapDispatchToProps = dispatch => ({
     onChangeChar(item) {

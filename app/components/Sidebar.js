@@ -3,7 +3,7 @@
  */
 import React from "react";
 import {BrowserRouter as Router, NavLink, Route} from "react-router-dom";
-import createHashHistory from "history/createHashHistory";
+import createBrowserHistory from "history/createBrowserHistory";
 import Home from "react-icons/lib/fa/home";
 import Pencil from "react-icons/lib/fa/pencil";
 import Cogs from "react-icons/lib/fa/cogs";
@@ -28,7 +28,7 @@ const Sidebar = routeData => {
     });
 
     return (
-        <Router history={createHashHistory()}>
+        <Router history={createBrowserHistory()}>
             <div>
                 <nav id="sidebar">
                     <h1>Reader</h1>

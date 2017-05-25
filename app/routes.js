@@ -20,7 +20,7 @@ const routes = [
     },
     {
         path: "/search",
-        component: CharacterItem
+        component: Search
     }
 ];
 

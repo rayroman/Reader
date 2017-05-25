@@ -4,7 +4,6 @@
  * Todo: add rest of the components at a later time
  */
 
-import * as React from "react";
 import SearchForm from "../containers/SearchForm";
 import CharacterCard from "../containers/CharacterCard";
 

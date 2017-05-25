@@ -9,7 +9,30 @@
   },
   "search": {
     "collection": "character",
-    "item": {}
+    "item": {
+      "pinyin" : [
+        "yī"
+      ],
+      "keyword" : "one",
+      "item" : {
+        "simplified" : "一",
+        "traditional" : "一"
+      },
+      "numbers" : {
+        "lesson" : 1,
+        "heisig" : 1,
+        "absolute" : 1
+      },
+      "stats" : {
+        "read" : false,
+        "timesSeen" : 0,
+        "timesCorrect" : 0
+      },
+      "srs" : {
+        "difficulty" : 0.3,
+        "daysBetweenReviews" : 0
+      }
+    }
   },
   "currentItem": {
     "char": {
