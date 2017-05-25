@@ -1,0 +1,35 @@
+@import "./main";
+
+#search {
+  width: 100%;
+  position: relative;
+  margin: 0 auto 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: stretch;
+  background-color: lighten($themeBlue, 5%);
+  border-bottom: solid 3px lighten($themeBlue, 20%);
+
+  input {
+    background: none;
+    font-size: 2em;
+    padding: 5px;
+    margin: auto 0;
+    border: 0;
+    color: lighten($themeBlue, 40%);
+    flex-grow: 9;
+
+    &:focus {
+      outline: none;
+    }
+  }
+
+  button {
+    color: $themeWhite;
+    background-color: lighten($themeBlue, 10%);
+    font-size: 1.2em;
+    margin: 0;
+    flex-grow: 1;
+    border: none;
+  }
+}

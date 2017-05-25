@@ -2,7 +2,7 @@
  * Created by rroman681 on 5/24/17.
  * Card for returning searches
  */
-
+import "../stylesheets/card.scss";
 // Usage of "keyword" key makes this specific to character (vs. vocab)
 const CharacterCard = ({character, isTraditional}) => {
     const {item, keyword} = character;
