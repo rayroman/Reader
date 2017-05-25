@@ -16,7 +16,7 @@
     padding: 5px;
     margin: auto 0;
     border: 0;
-    color: lighten($themeBlue, 40%);
+    color: lighten($themeWhite, 10%);
     flex-grow: 9;
 
     &:focus {
@@ -25,11 +25,19 @@
   }
 
   button {
-    color: $themeWhite;
+    color: $themeBlue;
     background-color: lighten($themeBlue, 10%);
     font-size: 1.2em;
     margin: 0;
     flex-grow: 1;
     border: none;
+  }
+
+  &.focusedForm {
+    border-bottom-color: $themeWhite;
+  }
+
+  .focusedButton {
+    color: $themeWhite;
   }
 }

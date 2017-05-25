@@ -4,7 +4,7 @@
 import "../stylesheets/search.scss";
 import FaSearch from "react-icons/lib/fa/search";
 
-const SearchForm = ({onChangeChar = f => f}) => {
+const SearchForm = ({onChangeChar = f => f, changeFocus = f => f, isFocused = false}) => {
     let item;
     // Talk to API when submitting a query
     const submit = e => {
@@ -13,16 +13,25 @@ const SearchForm = ({onChangeChar = f => f}) => {
         item.value = '';
     };
 
+    const formFocus = focused => {
+        changeFocus(focused);
+    };
+
     return (
         <form action=""
               method="get"
+              className={isFocused ? "focusedForm" : ""}
               onSubmit={submit}
               id="search"
         >
             <input type="text"
                    ref={input => item = input}
+                   onFocus={() => formFocus(true)}
+                   onBlur={() => formFocus(false)}
             />
-            <button><FaSearch/></button>
+            <button className={isFocused ? "focusedButton" : ""}>
+                <FaSearch/>
+            </button>
         </form>
     )
 };

@@ -8,6 +8,7 @@
     "isCorrect": null
   },
   "search": {
+    "isFocused": false,
     "collection": "character",
     "item": {
       "pinyin" : [

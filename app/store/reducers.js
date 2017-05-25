@@ -55,6 +55,12 @@ export const updateSearchCollection = (state = "character", action) => {
         state
 };
 
+export const focusGuessForm = (state = false, action) => {
+    return (action.type === C.UPDATE_FORM_FOCUS) ?
+        action.payload :
+        state
+};
+
 // What is the current TESTING character?
 export const currItem = coll => (state = {}, action) => {
     switch(action.type) {
@@ -79,7 +85,8 @@ export default combineReducers({
     }),
     search: combineReducers({
         collection: updateSearchCollection,
-        item: updateSearchResult
+        item: updateSearchResult,
+        isFocused: focusGuessForm
     }),
     currentItem: combineReducers({
         char: currItem("character"),

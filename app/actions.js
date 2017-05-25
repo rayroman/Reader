@@ -32,6 +32,12 @@ export const searchResult = item => ({
     payload: item
 });
 
+// Focus the form
+export const focusForm = isFocused => ({
+    type: C.UPDATE_FORM_FOCUS,
+    payload: isFocused
+});
+
 /***
  * Dispatch a query that depends on the collection you want. This updates the search state
  * @param coll - which collection you want to search (either character or vocabulary)
