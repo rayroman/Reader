@@ -3,9 +3,9 @@
  */
 import {expect} from "chai";
 import C from "../constants"
-import {isTrad, currLesson} from "../store/reducers";
+import {doToggleTrad, currLesson} from "../store/reducers";
 import storeFactory from "../store/index";
-import {charQuery, vocabQuery, submitGuess} from "../actions";
+import {queryCharacterAction, queryVocabularyAction, submitGuessAction} from "../actions";
 import {getCorrect} from "../selectors";
 import sinon from "sinon";
 import nock from "nock";
@@ -20,15 +20,15 @@ describe("toggling character", () => {
 
     describe("toggle once", () => {
         it("should return false when action dispatched", () => {
-            const result = isTrad(showTradState, action);
+            const result = doToggleTrad(showTradState, action);
             expect(result).to.equal(false);
         });
     });
 
     describe("toggle twice", () => {
         it("should return true when dispatched twice", () => {
-            const firstStep = isTrad(showTradState, action);
-            const result = isTrad(firstStep, action);
+            const firstStep = doToggleTrad(showTradState, action);
+            const result = doToggleTrad(firstStep, action);
             expect(result).to.equal(true);
         });
     })
@@ -44,11 +44,9 @@ describe("character database", () => {
             }
         },
         oneChar = {
-            char: {
-                item : {
-                    simplified : "一",
-                    traditional : "一"
-                }
+            item : {
+                simplified : "一",
+                traditional : "一"
             }
         };
 
@@ -58,13 +56,16 @@ describe("character database", () => {
     beforeEach(() => {
         apiURL = nock("http://localhost:8080");
         existsURL = apiURL
-                .get("/api/char/命")
+                .get("/api/character/命")
                 .reply(200, lifeChar);
         doesNotExistURL = apiURL
-                .get("/api/char/a")
+                .get("/api/character/a")
                 .reply(404, {});
         store = storeFactory({
-            currentItem: oneChar
+            search: {
+                collection: "character",
+                result: oneChar
+            }
         });
     });
 
@@ -72,10 +73,10 @@ describe("character database", () => {
         nock.cleanAll();
     });
 
-    // Testing fetching actions
+    // Testing fetching actions for SEARCH
     describe("fetching actions", () => {
         it("should successfully return", (done) => {
-            fetch("http://localhost:8080/api/char/命")
+            fetch("http://localhost:8080/api/character/命")
                 .then(res => res.json())
                 .then(res => {
                     const {item} = res;
@@ -85,7 +86,7 @@ describe("character database", () => {
         });
 
         it("should unsuccessfully return", (done) => {
-            fetch("http://localhost:8080/api/char/a")
+            fetch("http://localhost:8080/api/character/a")
                 .then(res => {
                     expect(res.status).to.equal(404);
                     done();
@@ -96,9 +97,9 @@ describe("character database", () => {
     describe("changing state", () => {
         // Successful change
         it("should change the current character", (done) => {
-            store.dispatch(charQuery("命"))
+            store.dispatch(queryCharacterAction("命"))
                 .then(() => {
-                    const {item} = store.getState().currentItem.char;
+                    const {item} = store.getState().search.result;
                     expect(item.traditional).to.equal("命");
                     done();
                 })
@@ -106,10 +107,10 @@ describe("character database", () => {
 
         // unsuccessful change
         it("should return the exact same character upon unsuccessful fetch", (done) => {
-            const charBefore = store.getState().currentItem.char.item.traditional;
-            store.dispatch(charQuery("a"))
+            const charBefore = store.getState().search.result.item.traditional;
+            store.dispatch(queryCharacterAction("a"))
                 .then(() => {
-                    const currChar = store.getState().currentItem.char.item.traditional;
+                    const currChar = store.getState().search.result.item.traditional;
                     expect(currChar).to.equal(charBefore);
                     done();
                 })
@@ -165,16 +166,16 @@ describe("changing lesson", () => {
 //         // Mocking the calls
 //         apiURL = nock("http://localhost:8080");
 //         char1URL = apiURL
-//             .get(`/api/char/${char1.charTrad}`)
+//             .get(`/api/character/${char1.charTrad}`)
 //             .reply(200, char1);
 //         char2URL = apiURL
-//             .get(`/api/char/${char2.charTrad}`)
+//             .get(`/api/character/${char2.charTrad}`)
 //             .reply(200, char2);
 //         vocabTrueURL = apiURL
-//             .get(`/api/vocab/${vocab.itemTrad}`)
+//             .get(`/api/vocabulary/${vocab.itemTrad}`)
 //             .reply(200, vocab);
 //         vocabFalseURL = apiURL
-//             .get("/api/vocab/a")
+//             .get("/api/vocabulary/a")
 //             .reply(404, {});
 //
 //         // Prepare the store with a current vocabulary item
@@ -198,7 +199,7 @@ describe("changing lesson", () => {
 //     describe("changing state", () => {
 //         // Successful change
 //         it("should change the current vocabulary item", (done) => {
-//             store.dispatch(vocabQuery("冰雹"))
+//             store.dispatch(queryVocabularyAction("冰雹"))
 //                 .then(() => {
 //                     expect(store.getState().currVocab.itemTrad).to.equal(vocab.itemTrad);
 //                     done();
@@ -208,7 +209,7 @@ describe("changing lesson", () => {
 //         // Unsuccessful change
 //         it("should return the exact same character", (done) => {
 //             const itemBefore = store.getState().currVocab.itemTrad;
-//             store.dispatch(vocabQuery("a"))
+//             store.dispatch(queryVocabularyAction("a"))
 //                 .then(() => {
 //                     expect(store.getState().currVocab.itemTrad).to.equal(itemBefore);
 //                     done();
@@ -239,7 +240,7 @@ describe("selectors", () => {
     // changing the guess
     describe("updating guess", () => {
         it("should update the guess to the most recently submitted item", () => {
-            store.dispatch(submitGuess(goodGuess));
+            store.dispatch(submitGuessAction(goodGuess));
             expect(store.getState().guess.mostRecent).to.equal(goodGuess);
         });
     });
@@ -247,7 +248,7 @@ describe("selectors", () => {
     // Processing the guess
     describe("processing guess", () => {
         it("should change the isCorrect field from null to true", () => {
-            store.dispatch(submitGuess(goodGuess));
+            store.dispatch(submitGuessAction(goodGuess));
             const result = getCorrect("char")(store.getState());
             expect(result).to.equal(true);
         });

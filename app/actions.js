@@ -5,7 +5,7 @@ import C from "./constants";
 import fetch from "isomorphic-fetch";
 
 // Switch from simplified to traditional and vice versa
-export const toggleChar = () => ({
+export const toggleCharAction = () => ({
     type: C.TOGGLE_TRADITIONAL
 });
 
@@ -21,19 +21,19 @@ export const toggleTesting = () => ({
 });
 
 // Submit a guess to be validated
-export const submitGuess = guess => ({
+export const submitGuessAction = guess => ({
     type: C.SUBMIT_GUESS,
     payload: guess
 });
 
 // Updating search results
-export const searchResult = item => ({
+export const searchResultAction = item => ({
     type: C.UPDATE_SEARCH_RESULT,
     payload: item
 });
 
 // Focus the form
-export const focusForm = isFocused => ({
+export const focusFormAction = isFocused => ({
     type: C.UPDATE_FORM_FOCUS,
     payload: isFocused
 });
@@ -56,9 +56,7 @@ const query = coll => item => (dispatch, getState) => {
                 getState().search.item;
         })
         .then((itemInfo) => {
-            console.log("item: ", itemInfo);
-            console.log("state: ", getState());
-            dispatch(searchResult(itemInfo));
+            dispatch(searchResultAction(itemInfo));
             dispatch({
                 type: C.UPDATE_SEARCH_COLLECTION,
                 payload: coll
@@ -71,7 +69,7 @@ const query = coll => item => (dispatch, getState) => {
 };
 
 // Find in character collection
-export const charQuery = query("character");
+export const queryCharacterAction = query("character");
 
 // Find in vocabulary collection
-export const vocabQuery = query("vocabulary");
+export const queryVocabularyAction = query("vocabulary");

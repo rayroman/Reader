@@ -4,7 +4,7 @@
 import {connect} from "react-redux";
 import GuessForm from "../components/GuessForm";
 import {getCorrect} from "../selectors";
-import {submitGuess} from "../actions";
+import {submitGuessAction} from "../actions";
 
 const mapStateToProps = state => ({
     isCorrect: getCorrect("char")(state)
@@ -12,7 +12,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
     processGuess: guess => {
-        dispatch(submitGuess(guess));
+        dispatch(submitGuessAction(guess));
     }
 });
 

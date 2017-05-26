@@ -1,16 +1,16 @@
 {
   "ui": {
     "showTraditional": true,
-    "isFetching": false
+    "isFetching": false,
+    "isSearchFocused": false
   },
   "guess": {
     "mostRecent": "",
     "isCorrect": null
   },
   "search": {
-    "isFocused": false,
     "collection": "character",
-    "item": {
+    "result": {
       "pinyin" : [
         "yī"
       ],

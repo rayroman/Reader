@@ -13,10 +13,6 @@ const SearchForm = ({onChangeChar = f => f, changeFocus = f => f, isFocused = fa
         item.value = '';
     };
 
-    const formFocus = focused => {
-        changeFocus(focused);
-    };
-
     return (
         <form action=""
               method="get"
@@ -26,8 +22,8 @@ const SearchForm = ({onChangeChar = f => f, changeFocus = f => f, isFocused = fa
         >
             <input type="text"
                    ref={input => item = input}
-                   onFocus={() => formFocus(true)}
-                   onBlur={() => formFocus(false)}
+                   onFocus={() => changeFocus(true)}
+                   onBlur={() => changeFocus(false)}
             />
             <button className={isFocused ? "focusedButton" : ""}>
                 <FaSearch/>

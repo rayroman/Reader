@@ -8,12 +8,12 @@ import SearchForm from "../containers/SearchForm";
 import CharacterCard from "../containers/CharacterCard";
 
 const Search = ({searchState}) => {
-    const {collection, item} = searchState;
+    const {collection, result} = searchState;
     return (
         <main>
             <SearchForm/>
             {collection === "character" ?
-                <CharacterCard character={item}/> :
+                <CharacterCard character={result}/> :
                 null // Put vocabulary item here
             }
         </main>

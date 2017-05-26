@@ -5,14 +5,14 @@ import C from "../constants";
 import {combineReducers} from "redux";
 
 // Toggle between traditional and simplified characters
-export const isTrad = (state = true, action) => {
+export const doToggleTrad = (state = true, action) => {
     return (action.type === C.TOGGLE_TRADITIONAL) ?
         !state :
         state;
 };
 
 // See if we're fetching anything from the API
-export const fetching = (state = false, action) => {
+export const doFetch = (state = false, action) => {
     switch(action.type) {
         case C.FETCH_ITEM:
             return true;
@@ -55,14 +55,14 @@ export const updateSearchCollection = (state = "character", action) => {
         state
 };
 
-export const focusGuessForm = (state = false, action) => {
+export const doFocusSearch = (state = false, action) => {
     return (action.type === C.UPDATE_FORM_FOCUS) ?
         action.payload :
         state
 };
 
 // What is the current TESTING character?
-export const currItem = coll => (state = {}, action) => {
+export const showCurrentItem = coll => (state = {}, action) => {
     switch(action.type) {
         case C.CLEAR_ITEM:
             return state;
@@ -76,8 +76,9 @@ export const currItem = coll => (state = {}, action) => {
 
 export default combineReducers({
     ui: combineReducers({
-        showTraditional: isTrad,
-        isFetching: fetching
+        showTraditional: doToggleTrad,
+        isFetching: doFetch,
+        isSearchFocused: doFocusSearch
     }),
     guess: combineReducers({
         mostRecent: updateGuess,
@@ -85,11 +86,10 @@ export default combineReducers({
     }),
     search: combineReducers({
         collection: updateSearchCollection,
-        item: updateSearchResult,
-        isFocused: focusGuessForm
+        result: updateSearchResult
     }),
     currentItem: combineReducers({
-        char: currItem("character"),
-        vocab: currItem("vocabulary")
+        char: showCurrentItem("character"),
+        vocab: showCurrentItem("vocabulary")
     })
 });
