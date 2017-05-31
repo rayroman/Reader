@@ -10,6 +10,7 @@
   },
   "search": {
     "collection": "character",
+    "isSuccessful": false,
     "result": {
       "pinyin" : [
         "yī"

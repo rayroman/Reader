@@ -32,6 +32,12 @@ export const searchResultAction = item => ({
     payload: item
 });
 
+// Updating search success
+export const searchSuccessAction = success => ({
+    type: C.UPDATE_SEARCH_SUCCESS,
+    payload: success
+});
+
 // Focus the form
 export const focusFormAction = isFocused => ({
     type: C.UPDATE_FORM_FOCUS,
@@ -48,15 +54,16 @@ const query = coll => item => (dispatch, getState) => {
     });
 
     return fetch(`http://localhost:8080/api/${coll}/${item}`)
-        .then(res => {
-            // Return if something is found
-            return (res.status === 200) ?
-                res.json() :
-                // Return original state if not
-                getState().search.item;
-        })
-        .then((itemInfo) => {
-            dispatch(searchResultAction(itemInfo));
+        .then((res) => {
+            dispatch(searchSuccessAction(res.status === 200)); // TODO: clean this up
+            if (res.status === 200) {
+                res.json()
+                    .then(value => {
+                        dispatch(searchResultAction(value))
+                    })
+            } else {
+                dispatch(searchResultAction(getState().search.result));
+            }
             dispatch({
                 type: C.UPDATE_SEARCH_COLLECTION,
                 payload: coll

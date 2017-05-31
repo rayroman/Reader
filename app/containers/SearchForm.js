@@ -7,7 +7,7 @@ import SearchForm from "../components/SearchForm";
 import {queryCharacterAction, focusFormAction} from "../actions";
 
 const mapStateToProps = state => ({
-    isFocused: state.ui.isSearchFocused
+    isFocused: state.ui.isSearchFocused,
 });
 
 const mapDispatchToProps = dispatch => ({

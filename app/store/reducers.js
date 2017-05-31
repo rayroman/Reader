@@ -55,6 +55,12 @@ export const updateSearchCollection = (state = "character", action) => {
         state
 };
 
+export const updateSearchSuccess = (state = false, action) => {
+    return (action.type === C.UPDATE_SEARCH_SUCCESS) ?
+        action.payload :
+        state
+};
+
 export const doFocusSearch = (state = false, action) => {
     return (action.type === C.UPDATE_FORM_FOCUS) ?
         action.payload :
@@ -86,7 +92,8 @@ export default combineReducers({
     }),
     search: combineReducers({
         collection: updateSearchCollection,
-        result: updateSearchResult
+        result: updateSearchResult,
+        isSuccessful: updateSearchSuccess
     }),
     currentItem: combineReducers({
         char: showCurrentItem("character"),

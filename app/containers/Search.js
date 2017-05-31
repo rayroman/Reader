@@ -4,11 +4,18 @@
 import {connect} from "react-redux";
 import {withRouter} from "react-router-dom";
 import Search from "../components/Search";
+import {queryCharacterAction} from "../actions";
 
 const mapStateToProps = state => ({
-    searchState: state.search
+    search: state.search
 });
 
-const container = connect(mapStateToProps)(Search);
+const mapDispatchToProps = dispatch => ({
+    sendSearch(item) {
+        dispatch(queryCharacterAction(item));
+    }
+});
+
+const container = connect(mapStateToProps, mapDispatchToProps)(Search);
 
 export default withRouter(container);
