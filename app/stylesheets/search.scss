@@ -1,43 +1,5 @@
-@import "./main";
-
-#search {
-  width: 100%;
-  position: relative;
-  margin: 0 auto 1rem;
+.characterPlusVocab {
   display: flex;
   justify-content: space-between;
-  align-items: stretch;
-  background-color: lighten($themeBlue, 5%);
-  border-bottom: solid 3px lighten($themeBlue, 20%);
-
-  input {
-    background: none;
-    font-size: 2em;
-    padding: 5px;
-    margin: auto 0;
-    border: 0;
-    color: lighten($themeWhite, 10%);
-    flex-grow: 9;
-
-    &:focus {
-      outline: none;
-    }
-  }
-
-  button {
-    color: $themeBlue;
-    background-color: lighten($themeBlue, 10%);
-    font-size: 1.2em;
-    margin: 0;
-    flex-grow: 1;
-    border: none;
-  }
-
-  &.focusedForm {
-    border-bottom-color: $themeWhite;
-  }
-
-  .focusedButton {
-    color: $themeWhite;
-  }
+  align-items: flex-start;
 }

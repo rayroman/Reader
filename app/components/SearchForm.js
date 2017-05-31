@@ -1,7 +1,7 @@
 /**
  * Created by rroman681 on 5/16/17.
  */
-import "../stylesheets/search.scss";
+import "../stylesheets/searchform.scss";
 import FaSearch from "react-icons/lib/fa/search";
 
 const SearchForm = ({onChangeChar = f => f, changeFocus = f => f, isFocused = false}) => {

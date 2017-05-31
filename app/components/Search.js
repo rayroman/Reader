@@ -6,15 +6,23 @@
 
 import SearchForm from "../containers/SearchForm";
 import CharacterCard from "../containers/CharacterCard";
+import VocabularyList from "../containers/VocabularyList";
+import "../stylesheets/search.scss";
 
 const Search = ({searchState}) => {
     const {collection, result} = searchState;
+    const characterPlusVocab = () => (
+        <div className="characterPlusVocab">
+            <CharacterCard character={result}/>
+            <VocabularyList items={result.vocabulary}/>
+        </div>
+    );
     return (
         <main>
             <SearchForm/>
-            {collection === "character" ?
-                <CharacterCard character={result}/> :
-                null // Put vocabulary item here
+            {result === null ?
+                <h1>Search above!</h1> :
+                characterPlusVocab()
             }
         </main>
     )
