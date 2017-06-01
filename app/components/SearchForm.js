@@ -5,7 +5,7 @@ import "../stylesheets/searchform.scss";
 import FaSearch from "react-icons/lib/fa/search";
 
 const SearchForm = ({onChangeChar = f => f, changeFocus = f => f, isFocused = false}) => {
-    let item;
+    let item, isChecked;
     // Talk to API when submitting a query
     const submit = e => {
         e.preventDefault();
@@ -13,22 +13,41 @@ const SearchForm = ({onChangeChar = f => f, changeFocus = f => f, isFocused = fa
         item.value = '';
     };
 
+    const changeCheck = e => {
+        e.preventDefault();
+    };
+
     return (
-        <form action=""
-              method="get"
-              className={isFocused ? "focusedForm" : ""}
-              onSubmit={submit}
-              id="search"
-        >
-            <input type="text"
-                   ref={input => item = input}
-                   onFocus={() => changeFocus(true)}
-                   onBlur={() => changeFocus(false)}
-            />
-            <button className={isFocused ? "focusedButton" : ""}>
-                <FaSearch/>
-            </button>
-        </form>
+        <div>
+            <form action=""
+                  method="get"
+                  className={isFocused ? "focusedForm" : ""}
+                  onSubmit={submit}
+                  id="search"
+            >
+                <input type="text"
+                       ref={input => item = input}
+                       onFocus={() => changeFocus(true)}
+                       onBlur={() => changeFocus(false)}
+                />
+                <button className={isFocused ? "focusedButton" : ""}>
+                    <FaSearch/>
+                </button>
+            </form>
+            <div id="searchToggle">
+                <span>Character</span>
+                <label className="switch">
+                    <input type="checkbox"
+                           defaultChecked={false}
+                           onChange={() => {}}
+                           />
+                    <div/>
+                </label>
+                <span>
+                    Vocabulary
+                </span>
+            </div>
+        </div>
     )
 };
 

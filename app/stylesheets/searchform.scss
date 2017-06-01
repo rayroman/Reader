@@ -41,3 +41,42 @@
     color: $themeWhite;
   }
 }
+
+#searchToggle {
+  float: right;
+
+  .switch {
+    vertical-align: -0.1em;
+    display: inline-block;
+    width: 2rem;
+    height: 1rem;
+    margin: 0 0.5rem;
+    background-color: darken($themeBlue, 5%);
+    border-radius: 1em;
+
+    div {
+      height: 1rem;
+      width: 1rem;
+      background-color: $themeWhite;
+      border-radius: 50%;
+      -webkit-transition: all 0.2s;
+      -moz-transition: all 0.2s;
+      -ms-transition: all 0.2s;
+      -o-transition: all 0.2s;
+      transition: all 0.2s;
+    }
+
+    input {
+      position: absolute;
+      opacity: 0;
+
+      &:checked + div {
+        -webkit-transform: translate3d(100%, 0, 0);
+        -moz-transform: translate3d(100%, 0, 0);
+        -ms-transform: translate3d(100%, 0, 0);
+        -o-transform: translate3d(100%, 0, 0);
+        transform: translate3d(100%, 0, 0);
+      }
+    }
+  }
+}
