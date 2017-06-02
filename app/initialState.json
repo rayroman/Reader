@@ -9,7 +9,7 @@
     "isCorrect": null
   },
   "search": {
-    "collection": "character",
+    "isCharacterCollection": true,
     "result": null
   },
   "currentItem": {

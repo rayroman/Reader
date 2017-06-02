@@ -5,7 +5,7 @@ import {expect} from "chai";
 import C from "../constants"
 import {doToggleTrad, currLesson} from "../store/reducers";
 import storeFactory from "../store/index";
-import {queryCharacterAction, queryVocabularyAction, submitGuessAction} from "../actions";
+import {query, submitGuessAction, searchCollectionAction} from "../actions";
 import {getCorrect} from "../selectors";
 import sinon from "sinon";
 import nock from "nock";
@@ -50,10 +50,11 @@ describe("character database", () => {
             }
         };
 
-    let apiURL, existsURL, doesNotExistURL;
+    let apiURL, existsURL, doesNotExistURL, collection;
 
 
     beforeEach(() => {
+        collection = "character";
         apiURL = nock("http://localhost:8080");
         existsURL = apiURL
                 .get("/api/character/命")
@@ -97,7 +98,7 @@ describe("character database", () => {
     describe("changing state", () => {
         // Successful change
         it("should change the current character", (done) => {
-            store.dispatch(queryCharacterAction("命"))
+            store.dispatch(query(collection)("命"))
                 .then(() => {
                     const {item} = store.getState().search.result;
                     expect(item.traditional).to.equal("命");
@@ -108,7 +109,7 @@ describe("character database", () => {
         // unsuccessful change
         it("should return the exact same character upon unsuccessful fetch", (done) => {
             const charBefore = store.getState().search.result.item.traditional;
-            store.dispatch(queryCharacterAction("a"))
+            store.dispatch(query(collection)("a"))
                 .then(() => {
                     const currChar = store.getState().search.result.item.traditional;
                     expect(currChar).to.equal(charBefore);
@@ -253,4 +254,31 @@ describe("selectors", () => {
             expect(result).to.equal(true);
         });
     });
+});
+
+// Switching the collection
+describe("switch search collection", () => {
+    let store;
+    beforeEach(() => {
+        store = storeFactory({
+            search: {
+                isCharacterCollection: true
+            }
+        })
+    });
+
+    describe("switch collection once", () => {
+        it("should switch from true (char) to false (vocab)", () => {
+            store.dispatch(searchCollectionAction());
+            expect(store.getState().search.isCharacterCollection).to.equal(false);
+        });
+    });
+
+    describe("switch collection twice", () => {
+        it("should stay true (char) after toggling twice", () => {
+            store.dispatch(searchCollectionAction());
+            store.dispatch(searchCollectionAction());
+            expect(store.getState().search.isCharacterCollection).to.equal(true);
+        });
+    })
 });

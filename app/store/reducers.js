@@ -49,9 +49,9 @@ export const updateSearchResult = (state = {}, action) => {
         state
 };
 
-export const updateSearchCollection = (state = "character", action) => {
+export const toggleSearchCollection = (state = true, action) => {
     return (action.type === C.UPDATE_SEARCH_COLLECTION) ?
-        action.payload :
+        !state :
         state
 };
 
@@ -85,7 +85,7 @@ export default combineReducers({
         isCorrect: validateGuess
     }),
     search: combineReducers({
-        collection: updateSearchCollection,
+        isCharacterCollection: toggleSearchCollection,
         result: updateSearchResult
     }),
     currentItem: combineReducers({

@@ -32,6 +32,10 @@ export const searchResultAction = item => ({
     payload: item
 });
 
+export const searchCollectionAction = () => ({
+    type: C.UPDATE_SEARCH_COLLECTION,
+});
+
 // Focus the form
 export const focusFormAction = isFocused => ({
     type: C.UPDATE_FORM_FOCUS,

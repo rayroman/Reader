@@ -4,7 +4,9 @@
 import "../stylesheets/searchform.scss";
 import FaSearch from "react-icons/lib/fa/search";
 
-const SearchForm = ({searchQuery = f => f, changeFocus = f => f, isFocused = false}) => {
+const SearchForm = ({searchQuery = f => f,
+                        changeFocus = f => f,
+                        isFocused = false}) => {
     let item, isChecked, collection = "character";
     // Talk to API when submitting a query
     const submit = e => {
