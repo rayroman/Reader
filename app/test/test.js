@@ -5,7 +5,7 @@ import {expect} from "chai";
 import C from "../constants"
 import {doToggleTrad, currLesson} from "../store/reducers";
 import storeFactory from "../store/index";
-import {query, submitGuessAction, searchCollectionAction} from "../actions";
+import {query, submitGuessAction, updateSearchCollectionAction} from "../actions";
 import {getCorrect} from "../selectors";
 import sinon from "sinon";
 import nock from "nock";
@@ -262,23 +262,15 @@ describe("switch search collection", () => {
     beforeEach(() => {
         store = storeFactory({
             search: {
-                isCharacterCollection: true
+                collection: "character"
             }
         })
     });
 
     describe("switch collection once", () => {
-        it("should switch from true (char) to false (vocab)", () => {
-            store.dispatch(searchCollectionAction());
-            expect(store.getState().search.isCharacterCollection).to.equal(false);
+        it("should switch from char to vocab", () => {
+            store.dispatch(updateSearchCollectionAction("vocabulary"));
+            expect(store.getState().search.collection).to.equal("vocabulary");
         });
     });
-
-    describe("switch collection twice", () => {
-        it("should stay true (char) after toggling twice", () => {
-            store.dispatch(searchCollectionAction());
-            store.dispatch(searchCollectionAction());
-            expect(store.getState().search.isCharacterCollection).to.equal(true);
-        });
-    })
 });

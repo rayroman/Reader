@@ -11,6 +11,13 @@ export const doToggleTrad = (state = true, action) => {
         state;
 };
 
+// Toggle the search UI
+export const doToggleUICollection = (state = true, action) => {
+    return (action.type === C.TOGGLE_COLLECTION) ?
+        !state :
+        state;
+};
+
 // See if we're fetching anything from the API
 export const doFetch = (state = false, action) => {
     switch(action.type) {
@@ -43,15 +50,15 @@ export const validateGuess = (state = null, action) => {
 };
 
 // Handling the searches
-export const updateSearchResult = (state = {}, action) => {
+export const doUpdateSearchResult = (state = {}, action) => {
     return (action.type === C.UPDATE_SEARCH_RESULT) ?
         action.payload :
         state
 };
 
-export const toggleSearchCollection = (state = true, action) => {
+export const doUpdateSearchCollection = (state = "character", action) => {
     return (action.type === C.UPDATE_SEARCH_COLLECTION) ?
-        !state :
+        action.payload :
         state
 };
 
@@ -78,15 +85,16 @@ export default combineReducers({
     ui: combineReducers({
         showTraditional: doToggleTrad,
         isFetching: doFetch,
-        isSearchFocused: doFocusSearch
+        isSearchFocused: doFocusSearch,
+        isCharacterCollection: doToggleUICollection
     }),
     guess: combineReducers({
         mostRecent: updateGuess,
         isCorrect: validateGuess
     }),
     search: combineReducers({
-        isCharacterCollection: toggleSearchCollection,
-        result: updateSearchResult
+        collection: doUpdateSearchCollection,
+        result: doUpdateSearchResult
     }),
     currentItem: combineReducers({
         char: showCurrentItem("character"),

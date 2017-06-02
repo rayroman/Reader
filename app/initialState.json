@@ -2,14 +2,15 @@
   "ui": {
     "showTraditional": true,
     "isFetching": false,
-    "isSearchFocused": false
+    "isSearchFocused": false,
+    "isCharacterCollection": true
   },
   "guess": {
     "mostRecent": "",
     "isCorrect": null
   },
   "search": {
-    "isCharacterCollection": true,
+    "collection": "character",
     "result": null
   },
   "currentItem": {

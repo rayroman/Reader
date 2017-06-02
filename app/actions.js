@@ -9,6 +9,10 @@ export const toggleCharAction = () => ({
     type: C.TOGGLE_TRADITIONAL
 });
 
+export const toggleSearchCollectionAction = () => ({
+    type: C.TOGGLE_COLLECTION
+});
+
 // Return the results from the query
 export const returnQuery = item => ({
     type: C.RETURN_ITEM,
@@ -27,13 +31,14 @@ export const submitGuessAction = guess => ({
 });
 
 // Updating search results
-export const searchResultAction = item => ({
+export const updateSearchResultAction = item => ({
     type: C.UPDATE_SEARCH_RESULT,
     payload: item
 });
 
-export const searchCollectionAction = () => ({
+export const updateSearchCollectionAction = coll => ({
     type: C.UPDATE_SEARCH_COLLECTION,
+    payload: coll
 });
 
 // Focus the form
@@ -60,7 +65,7 @@ export const query = coll => item => (dispatch, getState) => {
                 getState().search.result;
         })
         .then((itemInfo) => {
-            dispatch(searchResultAction(itemInfo));
+            dispatch(updateSearchResultAction(itemInfo));
             dispatch({
                 type: C.UPDATE_SEARCH_COLLECTION,
                 payload: coll
