@@ -58,21 +58,17 @@ export const query = coll => item => (dispatch, getState) => {
 
     return fetch(`http://localhost:8080/api/${coll}/${item}`)
         .then(res => {
-            // Return if something is found
-            return (res.status === 200) ?
-                res.json() :
-                // Return original state if not
-                getState().search.result;
-        })
-        .then((itemInfo) => {
-            dispatch(updateSearchResultAction(itemInfo));
-            dispatch({
-                type: C.UPDATE_SEARCH_COLLECTION,
-                payload: coll
-            });
-            dispatch({
-                type: C.CANCEL_FETCH
-            })
+            const success = res.status === 200;
+            if (success) {
+                res.json()
+                    .then(val => {
+                        dispatch(updateSearchResultAction(val));
+                        // dispatch(updateSearchCollectionAction(coll));
+                    })
+            } else {
+                dispatch(updateSearchResultAction(getState().search.result));
+                // dispatch(updateSearchCollectionAction(getState().search.collection));
+            }
         })
         .catch(err => console.log(err));
 };

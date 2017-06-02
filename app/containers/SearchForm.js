@@ -4,15 +4,22 @@
 
 import {connect} from "react-redux";
 import SearchForm from "../components/SearchForm";
-import {queryCharacterAction, focusFormAction, query} from "../actions";
+import {toggleSearchCollectionAction, updateSearchCollectionAction, focusFormAction, query} from "../actions";
 
 const mapStateToProps = state => ({
-    isFocused: state.ui.isSearchFocused
+    isFocused: state.ui.isSearchFocused,
+    isCharacterCollection: state.ui.isCharacterCollection
 });
 
 const mapDispatchToProps = dispatch => ({
     searchQuery(coll, item) {
         dispatch(query(coll)(item))
+    },
+    updateColl(coll) {
+        dispatch(updateSearchCollectionAction(coll))
+    },
+    toggleColl() {
+        dispatch(toggleSearchCollectionAction())
     },
     changeFocus(isFocused) {
         dispatch(focusFormAction(isFocused));

@@ -9,7 +9,6 @@ import FaList from "react-icons/lib/fa/list";
  */
 const VocabularyCard = ({vocabulary, isTraditional}) => {
     const {item, definitions, pinyin, characters} = vocabulary;
-    console.log(characters);
     return (
         <article className="card">
             <h1>{isTraditional ? item.traditional : item.simplified}</h1>
