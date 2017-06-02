@@ -4,12 +4,12 @@
 import "../stylesheets/searchform.scss";
 import FaSearch from "react-icons/lib/fa/search";
 
-const SearchForm = ({onChangeChar = f => f, changeFocus = f => f, isFocused = false}) => {
-    let item, isChecked;
+const SearchForm = ({searchQuery = f => f, changeFocus = f => f, isFocused = false}) => {
+    let item, isChecked, collection = "character";
     // Talk to API when submitting a query
     const submit = e => {
         e.preventDefault();
-        onChangeChar(item.value);
+        searchQuery((isChecked.checked) ? "vocabulary" : "character", item.value);
         item.value = '';
     };
 
@@ -39,6 +39,7 @@ const SearchForm = ({onChangeChar = f => f, changeFocus = f => f, isFocused = fa
                 <label className="switch">
                     <input type="checkbox"
                            defaultChecked={false}
+                           ref={checked => isChecked = checked}
                            onChange={() => {}}
                            />
                     <div/>

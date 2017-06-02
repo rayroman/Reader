@@ -4,15 +4,15 @@
 
 import {connect} from "react-redux";
 import SearchForm from "../components/SearchForm";
-import {queryCharacterAction, focusFormAction} from "../actions";
+import {queryCharacterAction, focusFormAction, query} from "../actions";
 
 const mapStateToProps = state => ({
     isFocused: state.ui.isSearchFocused
 });
 
 const mapDispatchToProps = dispatch => ({
-    onChangeChar(item) {
-        dispatch(queryCharacterAction(item))
+    searchQuery(coll, item) {
+        dispatch(query(coll)(item))
     },
     changeFocus(isFocused) {
         dispatch(focusFormAction(isFocused));

@@ -42,7 +42,7 @@ export const focusFormAction = isFocused => ({
  * Dispatch a query that depends on the collection you want. This updates the search state
  * @param coll - which collection you want to search (either character or vocabulary)
  */
-const query = coll => item => (dispatch, getState) => {
+export const query = coll => item => (dispatch, getState) => {
     dispatch({
         type: C.FETCH_ITEM
     });
@@ -53,7 +53,7 @@ const query = coll => item => (dispatch, getState) => {
             return (res.status === 200) ?
                 res.json() :
                 // Return original state if not
-                getState().search.item;
+                getState().search.result;
         })
         .then((itemInfo) => {
             dispatch(searchResultAction(itemInfo));
@@ -68,8 +68,11 @@ const query = coll => item => (dispatch, getState) => {
         .catch(err => console.log(err));
 };
 
+/*
+Not sure if I'll need these if I change this based on the checkbox...
 // Find in character collection
 export const queryCharacterAction = query("character");
 
 // Find in vocabulary collection
 export const queryVocabularyAction = query("vocabulary");
+*/

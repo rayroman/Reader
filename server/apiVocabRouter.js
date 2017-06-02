@@ -7,14 +7,14 @@ const express = require("express");
 const router = express.Router();
 
 const vocabRouterWithDB = db => {
-    const vocab = db.collection("vocabulary");
+    const vocabulary = db.collection("vocabulary");
 
     // Get a specific vocabulary item
     router.get("/vocabulary/:vocab", (req, res) => {
         const vocab = req.params.vocab;
 
         // Allow for both simplified and traditional, so can search either one
-        vocab.find({$or: [
+        vocabulary.find({$or: [
             {"item.traditional": vocab},
             {"item.simplified": vocab}
         ]})
